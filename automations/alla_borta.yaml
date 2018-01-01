@@ -1,0 +1,14 @@
+alias: "Alla borta"
+trigger:
+  platform: state
+  entity_id: input_boolean.someone_home
+  to: 'off'
+action:
+  service: homeassistant.turn_off
+  entity_id:
+    - group.julias_room
+    - group.klaras_room
+    - group.fa_room
+    - group.upstairs_livingroom
+    - group.downstairs_livingroom
+    - group.kitchen

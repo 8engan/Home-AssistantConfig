@@ -1,0 +1,385 @@
+- name: "Julia sovdags"
+  entities:
+    light.julia_spot_hoger_1:
+      state: on
+      brightness: 20
+      rgb_color: [239,210,117]
+    light.julia_spot_hoger_2: off
+    light.julia_spot_vanster_1: off
+    light.julia_spot_vanster_2: off
+    light.julia_spot_elefant: off
+- name: "Julia vardag"
+  entities:
+    light.julia_spot_hoger_1:
+      state: on
+      rgb_color: [241,224,181]
+      brightness: 203
+    light.julia_spot_hoger_2:
+      state: on
+      rgb_color: [241,224,181]
+      brightness: 203
+    light.julia_spot_vanster_1:
+      state: on
+      rgb_color: [241,224,181]
+      brightness: 203
+    light.julia_spot_vanster_2:
+      state: on
+      rgb_color: [241,224,181]
+      brightness: 203
+    light.julia_spot_elefant:
+      state: on
+      rgb_color: [241,224,181]
+      brightness: 203
+    switch.molnlampa_38: on
+- name: "Julia fokus"
+  entities:
+    light.julia_spot_hoger_1:
+      state: on
+      rgb_color: [245,250,246]
+      brightness: 254
+    light.julia_spot_hoger_2:
+      state: on
+      rgb_color: [245,250,246]
+      brightness: 254
+    light.julia_spot_vanster_1:
+      state: on
+      rgb_color: [245,250,246]
+      brightness: 254
+    light.julia_spot_vanster_2:
+      state: on
+      rgb_color: [245,250,246]
+      brightness: 254
+    light.julia_spot_elefant:
+      state: on
+      rgb_color: [245,250,246]
+      brightness: 254
+    switch.molnlampa_38: on
+- name: "Julia avkoppling"
+  entities:
+    light.julia_spot_hoger_1:
+      state: on
+      rgb_color: [239,210,117]
+      brightness: 154
+    light.julia_spot_hoger_2:
+      state: on
+      rgb_color: [239,210,117]
+      brightness: 154
+    light.julia_spot_vanster_1:
+      state: on
+      rgb_color: [239,210,117]
+      brightness: 154
+    light.julia_spot_vanster_2:
+      state: on
+      rgb_color: [239,210,117]
+      brightness: 154
+    light.julia_spot_elefant:
+      state: on
+      rgb_color: [239,210,117]
+      brightness: 154
+- name: "Klara sovdags"
+  entities:
+    light.klara_spot_hoger_1:
+      state: on
+      brightness: 20
+      rgb_color: [239,210,117]
+    light.klara_spot_hoger_2: off
+    light.klara_spot_vanster_1: off
+    light.klara_spot_vanster_2: off
+    switch.ravlampa_28: off
+    light.lifx_ljusslinga:
+      state: on
+      rgb_color: [51,51,51] 
+      brightness: 25
+- name: "Klara vardag"
+  entities:
+    light.klara_spot_hoger_1:
+      state: on
+      rgb_color: [241,224,181]
+      brightness: 203
+    light.klara_spot_hoger_2:
+      state: on
+      rgb_color: [241,224,181]
+      brightness: 203
+    light.klara_spot_vanster_1:
+      state: on
+      rgb_color: [241,224,181]
+      brightness: 203
+    light.klara_spot_vanster_2:
+      state: on
+      rgb_color: [241,224,181]
+      brightness: 203
+    switch.ravlampa_28: on
+    light.lifx_ljusslinga:
+      state: on
+      rgb_color: [241,224,181] 
+      brightness: 170
+- name: "Klara fokus"
+  entities:
+    light.klara_spot_hoger_1:
+      state: on
+      rgb_color: [245,250,246]
+      brightness: 254
+    light.klara_spot_hoger_2:
+      state: on
+      rgb_color: [245,250,246]
+      brightness: 254
+    light.klara_spot_vanster_1:
+      state: on
+      rgb_color: [245,250,246]
+      brightness: 254
+    light.klara_spot_vanster_2:
+      state: on
+      rgb_color: [245,250,246]
+      brightness: 254
+    switch.ravlampa_28: on
+    light.lifx_ljusslinga:
+      state: on
+      rgb_color: [245,245,245] 
+      brightness: 220
+- name: "Klara avkoppling"
+  entities:
+    light.klara_spot_hoger_1:
+      state: on
+      rgb_color: [239,210,117]
+      brightness: 154
+    light.klara_spot_hoger_2:
+      state: on
+      rgb_color: [239,210,117]
+      brightness: 154
+    light.klara_spot_vanster_1:
+      state: on
+      rgb_color: [239,210,117]
+      brightness: 154
+    light.klara_spot_vanster_2:
+      state: on
+      rgb_color: [239,210,117]
+      brightness: 154
+    switch.ravlampa_28: on
+    light.lifx_ljusslinga:
+      state: on
+      rgb_color: [239,210,117] 
+      brightness: 130
+- name: "Nedervaning av"
+  entities:
+    light.dimmer_svarta_tavlan_5: off
+    light.dimmer_tavelvagg_matbord_31: off
+    light.dimmer_tavelvagg_tv_18: off
+    light.stora_bollen: off
+    switch.lilla_bollen_7: off
+    switch.svarta_lampan_8: off
+    light.matbord_dimmer_14: off
+    light.svart_lampa_1: off
+    light.svart_lampa_2: off
+    light.svart_lampa_3: off
+- name: "Godnatt"
+  entities:
+    group.downstairs_livingroom: off
+    group.fa_room: off
+    group.kitchen: off
+    group.upstairs_livingroom: off
+- name: "Hela huset av"
+  entities:
+    group.downstairs_livingroom: off
+    group.fa_room: off
+    group.kitchen: off
+    group.julias_room: off
+    group.klaras_room: off
+    group.upstairs_livingroom: off
+- name: "Vardagsrum nere mys"
+  entities:
+    light.dimmer_svarta_tavlan_5:
+      state: on
+      brightness: 56
+    light.dimmer_tavelvagg_matbord_31:
+      state: on
+      brightness: 76
+    light.dimmer_tavelvagg_tv_18:
+      state: on
+      brightness: 51
+    light.stora_bollen:
+      state: on
+      brightness: 100
+      rgb_color: [239,210,117]
+    switch.lilla_bollen_7: on
+    switch.svarta_lampan_8: on
+    light.matbord_dimmer_14:
+      state: on
+      brightness: 70
+    switch.svart_vipplampa_36: on
+- name: "Vardagsrum nere tv"
+  entities:
+    light.dimmer_tavelvagg_tv_18:
+      state: on
+      brightness: 51
+    light.stora_bollen:
+      state: on
+      brightness: 100
+      rgb_color: [239,210,117]
+    switch.lilla_bollen_7: on
+- name: "Vardagsrum nere på"
+  entities:
+    light.dimmer_svarta_tavlan_5:
+      state: on
+      brightness: 255
+    light.dimmer_tavelvagg_matbord_31:
+      state: on
+      brightness: 255
+    light.dimmer_tavelvagg_tv_18:
+      state: on
+      brightness: 255
+    light.stora_bollen:
+      state: on
+      brightness: 255
+      rgb_color: [239,210,117]
+    switch.lilla_bollen_7: on
+    switch.svarta_lampan_8: on
+    light.matbord_dimmer_14:
+      state: on
+      brightness: 255
+    switch.svart_vipplampa_36: on
+- name: "Kök på"
+  entities:
+    light.taklampa_kok:
+      state: on
+      brightness: 254
+      rgb_color: [241,224,181]
+    switch.ljusslinga_kok_29:
+      state: on
+- name: "Kök vardagsmorgon"
+  entities:
+    light.taklampa_kok:
+      state: on
+      brightness: 175
+    switch.ljusslinga_kok_29:
+      state: on
+- name: "Kök fokus"
+  entities:
+    light.taklampa_kok:
+      state: on
+      brightness: 254
+    switch.ljusslinga_kok_29:
+      state: on
+- name: "Kök mys"
+  entities:
+    light.taklampa_kok:
+      state: on
+      brightness: 20
+    switch.ljusslinga_kok_29:
+      state: on
+- name: "Övervåning mys"
+  entities: 
+    light.ballonglampa:
+      state: on
+      brightness: 30
+    switch.svarta_skrivbordslampan_9: on
+    light.lilla_bollen_uppe_6:
+      state: on
+      brightness: 175
+    light.taklampa_uppe:
+      state: on
+      brightness: 30
+    switch.ljusslinga_skap_30:
+      state: on
+- name: "Övervåning på"
+  entities: 
+    light.ballonglampa:
+      state: on
+      brightness: 254
+      rgb_color: [239,210,117]
+    switch.svarta_skrivbordslampan_9: on
+    light.lilla_bollen_uppe_6:
+      state: on
+      brightness: 254
+    light.taklampa_uppe:
+      state: on
+      brightness: 254
+    switch.ljusslinga_skap_30:
+      state: on
+- name: "Övervåning av"
+  entities: 
+    group.fa_room: off
+    group.kitchen: off
+    group.julias_room: off
+    group.klaras_room: off
+    group.upstairs_livingroom: off
+- name: "Vardagsmorgon"
+  entities:
+    scene.overvaning_mys: on
+    scene.kok_vardagsmorgon: on
+    scene.vardagsrum_nere_mys: on
+- name: "FA vardag"
+  entities:
+    light.fa_spot_1:
+      state: on
+      brightness: 203
+    light.fa_spot_2:
+      state: on
+      brightness: 203
+    light.fa_spot_3:
+      state: on
+      brightness: 203
+    light.fa_spot_4:
+      state: on
+      brightness: 203
+    light.svart_lampa_1:
+      state: on
+      brightness: 203
+      rgb_color: [245,250,246]
+    light.svart_lampa_2:
+      state: on
+      brightness: 203
+    light.svart_lampa_3:
+      state: on
+      brightness: 203
+      rgb_color: [245,250,246]
+
+- name: "FA fokus"
+  entities:
+    light.fa_spot_1:
+      state: on
+      brightness: 254
+    light.fa_spot_2:
+      state: on
+      brightness: 254
+    light.fa_spot_3:
+      state: on
+      brightness: 254
+    light.fa_spot_4:
+      state: on
+      brightness: 254
+    light.svart_lampa_1:
+      state: on
+      brightness: 254
+      rgb_color: [245,250,246]
+    light.svart_lampa_2:
+      state: on
+      brightness: 254
+    light.svart_lampa_3:
+      state: on
+      brightness: 254
+      rgb_color: [245,250,246]
+- name: "FA mys"
+  entities:
+    light.fa_spot_1:
+      state: on
+      brightness: 20
+    light.fa_spot_2:
+      state: on
+      brightness: 20
+    light.fa_spot_3:
+      state: on
+      brightness: 20
+    light.fa_spot_4:
+      state: on
+      brightness: 20
+    light.svart_lampa_1:
+      rgb_color: [239,210,117]
+      state: on
+      brightness: 50
+    light.svart_lampa_2:
+      state: on
+      brightness: 50
+    light.svart_lampa_3:
+      state: on
+      brightness: 50
+      rgb_color: [239,210,117]

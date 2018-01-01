@@ -1,0 +1,13 @@
+alias: "vardagsrum_chromecast playing"
+trigger:
+  platform: state
+  entity_id: media_player.vardagsrum_nere #media_player.vardagsrum_chromecast
+  to: 'playing'
+  from: 'idle'
+condition:
+  condition: state
+  entity_id: sun.sun
+  state: 'below_horizon'
+action:
+  service: scene.turn_on
+  entity_id: scene.vardagsrum_nere_tv

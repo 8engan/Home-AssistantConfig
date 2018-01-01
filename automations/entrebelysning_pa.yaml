@@ -1,0 +1,9 @@
+alias: Sätta på entrébelysning
+trigger:
+  platform: sun
+  event: sunset
+  offset: '-01:00:00'
+action:
+  service: light.turn_on
+  entity_id: 
+  - light.entrelampa

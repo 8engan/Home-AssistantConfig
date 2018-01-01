@@ -1,0 +1,17 @@
+alias: Vardagsmorgon
+trigger:
+  platform: time
+  at: "06:00:00"
+condition: 
+  condition: and
+  conditions:
+    - condition: state
+      entity_id: binary_sensor.workday_sensor
+      state: 'on'
+    - condition: state
+      entity_id: input_boolean.override_vardagsmorgon
+      state: 'off'
+action:
+  service: homeassistant.turn_on
+  entity_id: 
+  - scene.vardagsmorgon

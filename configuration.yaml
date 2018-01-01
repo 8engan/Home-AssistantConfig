@@ -1,0 +1,165 @@
+homeassistant:
+  # Name of the location where Home Assistant is running
+  name: Home
+  # Location required to calculate the time the sun rises and sets
+  latitude: !secret home_latitude 
+  longitude: !secret home_longitude
+  # Impacts weather/sunrise data (altitude above sea level in meters)
+  elevation: 11
+  # metric for Metric, imperial for Imperial
+  unit_system: metric
+  # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+  time_zone: !secret time_zone
+
+# Show links to resources in log and frontend
+#introduction:
+
+# Enables the frontend
+frontend:
+  javascript_version: latest
+
+# Enables configuration UI
+config:
+
+http:
+  api_password: !secret api_password
+  #ssl_certificate: /home/homeassistant/.homeassistant/certificate.pem
+  #ssl_key: /home/homeassistant/.homeassistant/privkey.pem
+  trusted_networks: 
+    - 192.168.1.0/24
+  # Uncomment this to add a password (recommended!)
+  # api_password: 
+  # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
+  # base_url: example.duckdns.org:8123
+
+# Checks for available updates
+# Note: This component will send some information about your system to
+# the developers to assist with development of Home Assistant.
+# For more information, please see:
+# https://home-assistant.io/blog/2016/10/25/explaining-the-updater/
+updater:
+  # Optional, allows Home Assistant developers to focus on popular components.
+  # include_used_components: true
+
+# Discover some devices automatically
+discovery:
+
+# Allows you to issue voice commands from the frontend in enabled browsers
+conversation:
+
+# Enables support for tracking state changes over time
+history:
+
+# View all events in a logbook
+logbook:
+
+# To enable logging for debugging purposes
+logger:
+  default: warning
+  #logs:
+  #  homeassistant.components.mqtt: debug
+
+# Track the sun
+sun:
+
+# Weather prediction
+sensor:
+  - platform: yr
+    name: "Väder"
+    forecast: 24
+    monitored_conditions:
+      - temperature
+      - symbol
+      - precipitation
+      - windSpeed
+      - pressure
+      #- windDirection
+      #- humidity
+      #- fog
+      #- cloudiness
+
+# Text to speech
+tts:
+  - platform: google
+
+binary_sensor:
+  - platform: workday
+    country: "NO"
+
+# Scenes
+scene: !include_dir_list scenes
+
+group: !include groups.yaml
+
+automation: !include_dir_list automations
+
+# Vera
+vera:
+  vera_controller_url: !secret vera_url 
+
+# Ikea trådfri
+tradfri:
+  host: !secret tradfri_ip
+  allow_tradfri_groups: FALSE
+
+media_player:
+  - platform: sonos
+  - platform: cast
+
+panel_iframe:
+  mdiindex:
+    title: MDI Icon Index
+    icon: mdi:vector-square
+    url: https://cdn.rawgit.com/james-fry/home-assistant-mdi/efd95d7a/home-assistant-mdi.html
+
+ios:
+
+device_tracker:
+  - platform: owntracks
+    max_gps_accuracy: 200
+    discovery: enabled
+    consider_home: 180
+    track_new_devices: yes
+  - platform: nmap_tracker
+    hosts: 192.168.0.1/24
+    home_interval: 10
+    track_new_devices: yes
+  #- plaform: ping
+  #  track_new_devices: true
+  #  host:
+  #    hostone: 192.168.1.133
+      #hosttwo: 192.168.1.134 
+
+mqtt:
+  broker: !secret mqtt_broker 
+  port: !secret mqtt_port
+  username: ha 
+  password: Hv71bace 
+
+zone:
+  - name: Home
+    latitude: !secret home_latitude
+    longitude: !secret home_longitude
+    radius: 70
+    icon: mdi:home
+  - name: Work
+    latitude: !secret work_latitude
+    longitude: !secret work_longitude
+    icon: mdi:domain
+    radius: 80
+
+map:
+
+input_boolean:
+  someone_home:
+    name: Someone Home
+    initial: on
+    icon: mdi:cellphone-iphone
+  override_vardagsmorgon:
+    name: Override vardagsmorgon
+    initial: off
+    icon: mdi:theater
+
+light:
+  - platform: lifx
+

@@ -1,0 +1,184 @@
+default_view:
+ view: yes
+ icon: mdi:home
+ entities:
+ - zone.home
+ - zone.work
+ - sun.sun
+ - sensor.vader_symbol
+ - device_tracker.anders_bengtphone 
+ - device_tracker.frida_fridaphone
+ - input_boolean.someone_home
+ - input_boolean.override_vardagsmorgon
+ - group.hus_scener
+ - group.klara_scener
+ - group.julia_scener
+ - group.vrum_scener
+ - group.kok_scener
+ - group.vrumuppe_scener
+ - group.fa_scener
+
+room_view:
+ view: yes
+ icon: mdi:store 
+ entities:
+ - group.julias_room
+ - group.klaras_room
+ - group.fa_room
+ - group.upstairs_livingroom
+ - group.downstairs_livingroom
+ - group.kitchen
+ - group.entre
+ 
+mediaplayers:
+ control: hidden
+ name: "Media players"
+ view: yes
+ icon: mdi:cast
+ entities:
+ - group.sonos
+ - group.chromecasts
+
+sonos:
+ name: "Sonos"
+ icon: mdi:music
+ entities:
+ - media_player.kok
+ - media_player.vardagsrum 
+
+chromecasts:
+ name: "Chromecasts"
+ icon: mdi:cast
+ entities:
+ - media_player.vardagsrum_nere
+ - media_player.vardagsrum_uppe
+
+kitchen:
+ name: "Kök"
+ icon: mdi:food-fork-drink
+ entities:
+ - light.taklampa_kok
+ - switch.ljusslinga_kok_29
+
+upstairs_livingroom:
+ name: "Vardagsrum uppe"
+ icon: mdi:sofa
+ entities:
+ - light.ballonglampa
+ - switch.svarta_skrivbordslampan_9
+ - light.lilla_bollen_uppe_6
+ - light.taklampa_uppe
+ - switch.ljusslinga_skap_30
+
+downstairs_livingroom:
+ name: "Vardagsrum nere"
+ icon: mdi:sofa
+ entities:
+ - light.dimmer_svarta_tavlan_5
+ - light.dimmer_tavelvagg_matbord_31
+ - light.dimmer_tavelvagg_tv_18
+ - light.matbord_dimmer_14
+ - light.stora_bollen
+ - switch.lilla_bollen_7
+ - switch.svarta_lampan_8
+ - switch.svart_vipplampa_36
+
+julias_room:
+ name: "Julias rum"
+ icon: mdi:hotel
+ entities:
+ - light.julia_spot_elefant
+ - light.julia_spot_hoger_1
+ - light.julia_spot_hoger_2
+ - light.julia_spot_vanster_1
+ - light.julia_spot_vanster_2
+ 
+klaras_room:
+ name: "Klaras rum"
+ icon: mdi:hotel
+ entities:
+ - light.klara_spot_hoger_1
+ - light.klara_spot_hoger_2
+ - light.klara_spot_vanster_1
+ - light.klara_spot_vanster_2
+ - switch.klara_kaninlampa_28
+ - light.lifx_ljusslinga
+
+fa_room:
+ name: "Sovrum Frida o Anders"
+ icon: mdi:hotel
+ entities:
+ - light.fa_spot_1
+ - light.fa_spot_2
+ - light.fa_spot_3
+ - light.fa_spot_4
+ - light.svart_lampa_1
+ - light.svart_lampa_2
+ - light.svart_lampa_3
+
+entre:
+ name: "Entré"
+ icon: mdi:castle
+ entities:
+ - light.entrelampa
+
+fa_scener:
+ name: "Frida o Anders - scener"
+ icon: mdi:theater
+ entities:
+ - scene.fa_vardag
+ - scene.fa_fokus
+ - scene.fa_mys
+
+klara_scener:
+ name: "Klara - scener"
+ icon: mdi:theater
+ entities:
+ - scene.klara_sovdags
+ - scene.klara_vardag
+ - scene.klara_fokus
+ - scene.klara_avkoppling
+
+julia_scener:
+ name: "Julia - scener"
+ icon: mdi:theater
+ entities:
+ - scene.julia_sovdags
+ - scene.julia_vardag
+ - scene.julia_fokus
+ - scene.julia_avkoppling
+ 
+vrum_scener:
+ name: "Vardagsrum - scener"
+ icon: mdi:theater
+ entities:
+ - scene.vardagsrum_nere_mys
+ - scene.vardagsrum_nere_pa
+ - scene.vardagsrum_nere_tv
+
+hus_scener:
+ name: "Hela huset - scener"
+ icon: mdi:theater
+ entities:
+ - scene.nedervaning_av
+ - scene.godnatt
+ - scene.vardagsmorgon
+ - scene.hela_huset_av
+
+kok_scener:
+ name: "Kök - scener"
+ icon: mdi:kitchen
+ entities:
+ - scene.kok_pa
+ - scene.kok_fokus
+ - scene.kok_mys
+
+vrumuppe_scener:
+ name: "Vardagsrum uppe - scener" 
+ icon: mdi:theater
+ entities:
+ - scene.overvaning_mys
+ - scene.overvaning_pa
+ - scene.overvaning_av
+
+
