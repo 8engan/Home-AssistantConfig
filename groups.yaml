@@ -92,6 +92,7 @@ julias_room:
  - light.julia_spot_hoger_2
  - light.julia_spot_vanster_1
  - light.julia_spot_vanster_2
+ - switch.molnlampa_38
  
 klaras_room:
  name: "Klaras rum"
@@ -101,7 +102,7 @@ klaras_room:
  - light.klara_spot_hoger_2
  - light.klara_spot_vanster_1
  - light.klara_spot_vanster_2
- - switch.klara_kaninlampa_28
+ - switch.ravlampa_28
  - light.lifx_ljusslinga
 
 fa_room:
