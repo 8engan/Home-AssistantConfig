@@ -1,7 +1,8 @@
 alias: "Någon kommer hem - bool"
 trigger:
   platform: template
-  value_template: "{% if (is_state('device_tracker.anders_bengtphone','home')) or (is_state('device_tracker.frida_fridaphone','home')) %}true{% endif %}"
+  #value_template: "{% if (is_state('device_tracker.anders_bengtphone','home')) or (is_state('device_tracker.frida_fridaphone','home')) or (is_state('device_tracker.frida_ping','home')) or (is_state('device_tracker.anders_ping','home')) or (is_state('device_tracker.anders_anders_owntracks','home')) %}true{% endif %}"
+  value_template: "{% if (is_state('input_boolean.anders_hemma','on')) or (is_state('input_boolean.frida_hemma','on')) %}true{% endif %}"
   #value_template: "{% if (is_state('device_tracker.anders_bengtphone','home')) %}true{% endif %}"
 condition:
   condition: state

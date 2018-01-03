@@ -10,6 +10,8 @@ default_view:
  - device_tracker.frida_fridaphone
  - input_boolean.someone_home
  - input_boolean.override_vardagsmorgon
+ - input_boolean.anders_hemma
+ - input_boolean.frida_hemma
  - group.hus_scener
  - group.klara_scener
  - group.julia_scener
@@ -38,6 +40,18 @@ mediaplayers:
  entities:
  - group.sonos
  - group.chromecasts
+
+automations:
+  control: hidden
+  view: yes
+  icon: mdi:theater
+  entities:
+  - automation.alla_borta
+  - automation.nagon_kommer_hem
+  - automation.satta_pa_entrebelysning
+  - automation.stanga_av_entrebelysning
+  - automation.vardagsmorgon
+  - automation.vardagsrum_chromecast_playing
 
 sonos:
  name: "Sonos"
@@ -122,6 +136,7 @@ entre:
  icon: mdi:castle
  entities:
  - light.entrelampa
+ - light.dimmer_hall_39
 
 fa_scener:
  name: "Frida o Anders - scener"

@@ -177,6 +177,7 @@
     group.fa_room: off
     group.kitchen: off
     group.upstairs_livingroom: off
+    light.dimmer_hall_39: off
 - name: "Hela huset av"
   entities:
     group.downstairs_livingroom: off
@@ -237,6 +238,19 @@
       state: on
       brightness: 255
     switch.svart_vipplampa_36: on
+- name: "Vardagsrum nere grundbelysning"
+  entities:
+    light.dimmer_svarta_tavlan_5: off
+    light.dimmer_tavelvagg_matbord_31: off
+    light.dimmer_tavelvagg_tv_18: off
+    light.stora_bollen:
+      state: on
+      brightness: 100
+      rgb_color: [239,210,117]
+    switch.lilla_bollen_7: on
+    switch.svarta_lampan_8: on
+    light.matbord_dimmer_14: off
+    switch.svart_vipplampa_36: off
 - name: "Kök på"
   entities:
     light.taklampa_kok:
@@ -249,7 +263,7 @@
   entities:
     light.taklampa_kok:
       state: on
-      brightness: 175
+      brightness: 200
     switch.ljusslinga_kok_29:
       state: on
 - name: "Kök fokus"
@@ -307,6 +321,9 @@
     scene.overvaning_mys: on
     scene.kok_vardagsmorgon: on
     scene.vardagsrum_nere_mys: on
+    light.dimmer_hall_39:
+      state: on
+      brightness: 100
 - name: "FA vardag"
   entities:
     light.fa_spot_1:
@@ -383,3 +400,16 @@
       state: on
       brightness: 50
       rgb_color: [239,210,117]
+- name: "Hus grundbelysning"
+  entities:
+    light.ballonglampa:
+      state: on
+      brightness: 30
+    switch.ljusslinga_kok_29:
+      state: on
+    light.stora_bollen:
+      state: on
+      brightness: 100
+      rgb_color: [239,210,117]
+    switch.lilla_bollen_7: on
+    switch.svarta_lampan_8: on
