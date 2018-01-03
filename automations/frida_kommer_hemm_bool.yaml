@@ -1,0 +1,12 @@
+alias: "Anders kommer hem - bool"
+trigger:
+  platform: template
+  value_template: "{% if (is_state('device_tracker.frida_fridaphone','home')) or (is_state('device_tracker.frida_ping','home')) %}true{% endif %}"
+  #value_template: "{% if (is_state('device_tracker.anders_bengtphone','home')) %}true{% endif %}"
+condition:
+  condition: state
+  entity_id: input_boolean.frida_hemma
+  state: 'off'
+action:
+  service: input_boolean.turn_on
+  entity_id: input_boolean.frida_hemma
