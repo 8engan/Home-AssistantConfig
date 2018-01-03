@@ -1,8 +1,8 @@
-alias: "Anders kommer hem - bool"
+alias: "frida kommer hem - bool"
 trigger:
   platform: template
-  value_template: "{% if (is_state('device_tracker.frida_fridaphone','home')) or (is_state('device_tracker.frida_ping','home')) %}true{% endif %}"
-  #value_template: "{% if (is_state('device_tracker.anders_bengtphone','home')) %}true{% endif %}"
+  value_template: "{% if (is_state('device_tracker.frida_ios','home')) or (is_state('device_tracker.frida_ping','home')) or (is_state('device_tracker.frida_frida_owntracks','home')) %}true{% endif %}"
+  #value_template: "{% if (is_state('device_tracker.frida_bengtphone','home')) %}true{% endif %}"
 condition:
   condition: state
   entity_id: input_boolean.frida_hemma
