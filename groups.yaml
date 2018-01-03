@@ -6,8 +6,12 @@ default_view:
  - zone.work
  - sun.sun
  - sensor.vader_symbol
- - device_tracker.anders_bengtphone 
- - device_tracker.frida_fridaphone
+ - sensor.anders_location
+ - sensor.frida_location
+ - binary_sensor.anders_location_bin
+ - binary_sensor.frida_location_bin
+ - device_tracker.anders_anders_owntracks
+ - device_tracker.frida_frida_owntracks
  - input_boolean.someone_home
  - input_boolean.override_vardagsmorgon
  - input_boolean.anders_hemma
@@ -19,6 +23,7 @@ default_view:
  - group.kok_scener
  - group.vrumuppe_scener
  - group.fa_scener
+ - group.trackers
 
 room_view:
  view: yes
@@ -197,4 +202,26 @@ vrumuppe_scener:
  - scene.overvaning_pa
  - scene.overvaning_av
 
+person_anders:
+  name: "Anders"
+  icon: mdi:face
+  entities:
+    - device_tracker.anders_ping
+    - device_tracker.anders_anders_owntracks
+    - device_tracker.anders_ios
+
+person_frida:
+  name: Frida
+  icon: mdi:face
+  entities:
+    - device_tracker.frida_ping
+    - device_tracker.frida_frida_owntracks
+    - device_tracker.frida_ios
+
+trackers:
+  name: "Device tracking"
+  icon: mdi:face
+  entities:
+    - group.person_anders
+    - group.person_frida
 

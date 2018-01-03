@@ -320,7 +320,7 @@
   entities:
     scene.overvaning_mys: on
     scene.kok_vardagsmorgon: on
-    scene.vardagsrum_nere_mys: on
+    scene.vardagsrum_nere_grundbelysning: on
     light.dimmer_hall_39:
       state: on
       brightness: 100

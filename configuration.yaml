@@ -10,6 +10,7 @@ homeassistant:
   unit_system: metric
   # Pick yours from here: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
   time_zone: !secret time_zone
+  customize: !include customize.yaml
 
 # Show links to resources in log and frontend
 #introduction:
@@ -56,8 +57,8 @@ logbook:
 # To enable logging for debugging purposes
 logger:
   default: warning
-  logs:
-    homeassistant.components.device_tracker: debug
+  #logs:
+    #homeassistant.components.device_tracker: debug
 
 
 
@@ -79,6 +80,18 @@ sensor:
       #- humidity
       #- fog
       #- cloudiness
+  - platform: template
+    sensors:
+      anders_location:
+        value_template: '{% if is_state("input_boolean.anders_hemma", "on") %}Home{% else %}Away{%- endif %}'
+        friendly_name: "Anders"
+        #device_class: presence
+      frida_location:
+        value_template: '{% if is_state("input_boolean.frida_hemma", "on") %}Home{% else %}Away{%- endif %}'
+        friendly_name: "Frida"
+      #  device_class: presence
+
+
 
 # Text to speech
 tts:
@@ -87,6 +100,16 @@ tts:
 binary_sensor:
   - platform: workday
     country: "NO"
+  - platform: template
+    sensors:
+      anders_location_bin:
+        value_template: '{% if is_state("input_boolean.anders_hemma", "on") %}on{% else %}off{%- endif %}'
+        friendly_name: "Anders"
+        device_class: presence
+      frida_location_bin:
+        value_template: '{% if is_state("input_boolean.frida_hemma", "on") %}on{% else %}off{%- endif %}'
+        friendly_name: "Frida"
+        device_class: presence
 
 # Scenes
 scene: !include_dir_list scenes
@@ -124,7 +147,7 @@ device_tracker:
       anders_ping: 192.168.1.133
       frida_ping: 192.168.1.134 
   - platform: owntracks
-    max_gps_accuracy: 200
+    max_gps_accuracy: 250
     discovery: enabled
     consider_home: 180
     track_new_devices: yes
@@ -143,13 +166,13 @@ zone:
   - name: Home
     latitude: !secret home_latitude
     longitude: !secret home_longitude
-    radius: 70
+    radius: 100
     icon: mdi:home
   - name: Work
     latitude: !secret work_latitude
     longitude: !secret work_longitude
     icon: mdi:domain
-    radius: 80
+    radius: 100
 
 map:
 
