@@ -56,8 +56,10 @@ logbook:
 # To enable logging for debugging purposes
 logger:
   default: warning
-  #logs:
-  #  homeassistant.components.mqtt: debug
+  logs:
+    homeassistant.components.device_tracker: debug
+
+
 
 # Track the sun
 sun:
@@ -115,6 +117,12 @@ panel_iframe:
 ios:
 
 device_tracker:
+  - platform: ping
+    track_new_devices: False
+    consider_home: 180
+    hosts:
+      anders_ping: 192.168.1.133
+      frida_ping: 192.168.1.134 
   - platform: owntracks
     max_gps_accuracy: 200
     discovery: enabled
@@ -124,11 +132,6 @@ device_tracker:
     hosts: 192.168.0.1/24
     home_interval: 10
     track_new_devices: yes
-  #- plaform: ping
-  #  track_new_devices: true
-  #  host:
-  #    hostone: 192.168.1.133
-      #hosttwo: 192.168.1.134 
 
 mqtt:
   broker: !secret mqtt_broker 
@@ -159,6 +162,12 @@ input_boolean:
     name: Override vardagsmorgon
     initial: off
     icon: mdi:theater
+  frida_hemma:
+    initial: on
+    icon: mdi:cellphone-iphone
+  anders_hemma:
+    initial: on
+    icon: mdi:cellphone-iphone
 
 light:
   - platform: lifx

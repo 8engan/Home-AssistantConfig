@@ -1,0 +1,8 @@
+#sensor.anders_location:
+#  entity_picture: !secret anders_pic_url 
+#sensor.frida_location:
+#  entity_picture: !secret frida_pic_url 
+#binary_sensor.anders_location_bin:
+#  entity_picture: !secret anders_pic_url 
+#binary_sensor.frida_location_bin:
+#  entity_picture: !secret frida_pic_url K
