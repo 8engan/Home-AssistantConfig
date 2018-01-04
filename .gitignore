@@ -1,7 +1,9 @@
 *
 !*.yaml
+!*.py
 !scenes
 !automations
+!custom_components
 !.gitignore
 !.travis.yml
 secrets.yaml
