@@ -6,12 +6,14 @@ default_view:
  - zone.work
  - sun.sun
  - sensor.vader_symbol
+ - sensor.vader_temperature
  - sensor.anders_location
  - sensor.frida_location
- - binary_sensor.anders_location_bin
- - binary_sensor.frida_location_bin
- - device_tracker.anders_anders_owntracks
- - device_tracker.frida_frida_owntracks
+ #- binary_sensor.anders_location_bin
+ #- binary_sensor.frida_location_bin
+ #- device_tracker.anders_anders_owntracks
+ #- device_tracker.frida_frida_owntracks
+ - alarm_control_panel.sector_alarm_02700305
  - input_boolean.someone_home
  - input_boolean.override_vardagsmorgon
  - input_boolean.anders_hemma
@@ -45,6 +47,7 @@ mediaplayers:
  entities:
  - group.sonos
  - group.chromecasts
+ - group.tvs
 
 automations:
   control: hidden
@@ -56,14 +59,16 @@ automations:
   - automation.satta_pa_entrebelysning
   - automation.stanga_av_entrebelysning
   - automation.vardagsmorgon
-  - automation.vardagsrum_chromecast_playing
+  - automation.vrum_uppe_chromecast
+  - automation.vrum_nere_chromecast
+  - automation.daligt_vader
 
 sonos:
  name: "Sonos"
  icon: mdi:music
  entities:
- - media_player.kok
- - media_player.vardagsrum 
+ - media_player.kok_sonos
+ - media_player.vardagsrum_sonos
 
 chromecasts:
  name: "Chromecasts"
@@ -71,6 +76,12 @@ chromecasts:
  entities:
  - media_player.vardagsrum_nere
  - media_player.vardagsrum_uppe
+
+tvs:
+ name: "TVs"
+ icon: mdi:television
+ entities:
+ - media_player.tv_nere
 
 kitchen:
  name: "Kök"

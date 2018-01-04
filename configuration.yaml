@@ -57,8 +57,8 @@ logbook:
 # To enable logging for debugging purposes
 logger:
   default: warning
-  #logs:
-    #homeassistant.components.device_tracker: debug
+  logs:
+    homeassistant.components.sector_alarm: debug
 
 
 
@@ -130,6 +130,11 @@ tradfri:
 media_player:
   - platform: sonos
   - platform: cast
+  #- platform: samsungtv
+  #  host: !secret samsungtv_ip
+  #  name: "TV nere"
+  #  mac: !secret samsungtv_mac 
+  #  port: 8001
 
 panel_iframe:
   mdiindex:
@@ -195,3 +200,10 @@ input_boolean:
 light:
   - platform: lifx
 
+sector_alarm:
+  email: anders.bengt@gmail.com
+  password: !secret secalarm_pword
+  alarm_id: !secret secalarm_id #<can be found from the url when you login to Sector Alarm>
+  code: !secret secalarm_pin #<Your pin code to asm/disarm, optional>
+  thermometers: true #<if any thermometers should be added to HA>
+  alarm_panel: true #<if the alarm panel component should be added to HA>

@@ -1,0 +1,11 @@
+alias: "Anders lämnar hem - bool"
+trigger:
+  platform: template
+  value_template: "{% if ( not is_state('device_tracker.anders_ios','home')) and (not is_state('device_tracker.anders_ping','home')) and (not is_state('device_tracker.anders_anders_owntracks','home')) %}true{% endif %}"
+condition:
+  condition: state
+  entity_id: input_boolean.anders_hemma
+  state: 'on'
+action:
+  service: input_boolean.turn_off
+  entity_id: input_boolean.anders_hemma

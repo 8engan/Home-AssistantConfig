@@ -8,6 +8,7 @@
     light.julia_spot_vanster_1: off
     light.julia_spot_vanster_2: off
     light.julia_spot_elefant: off
+    switch.molnlampa_38: off
 - name: "Julia vardag"
   entities:
     light.julia_spot_hoger_1:
@@ -289,9 +290,6 @@
     light.lilla_bollen_uppe_6:
       state: on
       brightness: 175
-    light.taklampa_uppe:
-      state: on
-      brightness: 30
     switch.ljusslinga_skap_30:
       state: on
 - name: "Övervåning på"
@@ -304,9 +302,6 @@
     light.lilla_bollen_uppe_6:
       state: on
       brightness: 254
-    light.taklampa_uppe:
-      state: on
-      brightness: 254
     switch.ljusslinga_skap_30:
       state: on
 - name: "Övervåning av"
@@ -316,6 +311,17 @@
     group.julias_room: off
     group.klaras_room: off
     group.upstairs_livingroom: off
+- name: "Vardagsrum uppe tv"
+  entities:
+    light.ballonglampa:
+      state: on
+      brightness: 150
+      rgb_color: [239,210,117]
+    light.lilla_bollen_uppe_6:
+      state: on
+      brightness: 100
+    switch.ljusslinga_skap_30:
+      state: on
 - name: "Vardagsmorgon"
   entities:
     scene.overvaning_mys: on
