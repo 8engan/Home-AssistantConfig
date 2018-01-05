@@ -164,8 +164,8 @@ device_tracker:
 mqtt:
   broker: !secret mqtt_broker 
   port: !secret mqtt_port
-  username: ha 
-  password: Hv71bace 
+  
+  
 
 zone:
   - name: Home
