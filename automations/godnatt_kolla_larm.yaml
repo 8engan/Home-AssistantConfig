@@ -1,0 +1,17 @@
+alias: "Godnatt - kolla larm"
+trigger:
+  - platform: event
+    event_type: call_service
+    event_data:
+      service_data:
+        entity_id: scene.godnatt
+      domain: scene
+      service: turn_on
+condition:
+  condition: state
+  entity_id: input_boolean.secalarm_disarmed
+  state: 'on'
+action:
+  service: notify.pushbullet
+  data:
+    message: 'Larm inte påslaget'
