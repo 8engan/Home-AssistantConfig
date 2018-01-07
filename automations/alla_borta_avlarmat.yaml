@@ -1,0 +1,15 @@
+alias: "Alla borta - avlarmat"
+trigger:
+  - platform: state
+    #entity_id: input_boolean.someone_home
+    entity_id: binary_sensor.someone_home_bin
+    from: 'on'
+    to: 'off'
+condition:
+  condition: state
+  entity_id: input_boolean.secalarm_armedaway
+  state: 'on' 
+action:
+  service: notify.pushbullet
+  data:
+    message: 'Ingen hemma - Larm inte påslaget'

@@ -1,8 +1,15 @@
 alias: "Alla borta"
 trigger:
-  platform: state
-  entity_id: input_boolean.someone_home
-  to: 'off'
+  - platform: state
+    #entity_id: input_boolean.someone_home
+    entity_id: binary_sensor.someone_home_bin
+    from: 'on'
+    to: 'off'
+  - platform: state
+    entity_id: input_boolean.secalarm_armedaway
+    #entity_id: input_boolean.secalarm_armedaway
+    from: 'off'
+    to: 'on'
 action:
   service: homeassistant.turn_off
   entity_id:

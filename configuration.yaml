@@ -28,6 +28,7 @@ http:
   #ssl_key: /home/homeassistant/.homeassistant/privkey.pem
   trusted_networks: 
     - 192.168.1.0/24
+    - 172.0.0.1 
   # Uncomment this to add a password (recommended!)
   # api_password: 
   # Uncomment this if you are using SSL/TLS, running in Docker container, etc.
@@ -80,15 +81,15 @@ sensor:
       #- humidity
       #- fog
       #- cloudiness
-  - platform: template
-    sensors:
-      anders_location:
-        value_template: '{% if is_state("input_boolean.anders_hemma", "on") %}Home{% else %}Away{%- endif %}'
-        friendly_name: "Anders"
+  #- platform: template
+  #  sensors:
+  #    anders_location:
+  #      value_template: '{% if is_state("input_boolean.anders_hemma", "on") %}Home{% else %}Away{%- endif %}'
+  #      friendly_name: "Anders"
         #device_class: presence
-      frida_location:
-        value_template: '{% if is_state("input_boolean.frida_hemma", "on") %}Home{% else %}Away{%- endif %}'
-        friendly_name: "Frida"
+  #    frida_location:
+  #      value_template: '{% if is_state("input_boolean.frida_hemma", "on") %}Home{% else %}Away{%- endif %}'
+  #      friendly_name: "Frida"
       #  device_class: presence
 
 
@@ -102,14 +103,48 @@ binary_sensor:
     country: "NO"
   - platform: template
     sensors:
-      anders_location_bin:
-        value_template: '{% if is_state("input_boolean.anders_hemma", "on") %}on{% else %}off{%- endif %}'
-        friendly_name: "Anders"
+      #anders_location_bin:
+        #value_template: '{% if is_state("input_boolean.anders_hemma", "on") %}on{% else %}off{%- endif %}'
+        #value_template: '{% if (is_state("device_tracker.anders_ping","home")) or (is_state("device_tracker.anders_anders_owntracks","home")) %}on{% else %}off{% endif %}'
+        #friendly_name: "Anders"
+        #device_class: presence
+      #frida_location_bin:
+        #value_template: '{% if is_state("input_boolean.frida_hemma", "on") %}on{% else %}off{%- endif %}'
+        #value_template: '{% if (is_state("device_tracker.frida_ping","home")) or (is_state("device_tracker.frida_frida_owntracks","home")) %}on{% else %}off{% endif %}'
+        #friendly_name: "Frida"
+        #device_class: presence
+      nagon_hemma_bin:
+        friendly_name: "Någon hemma bin"
         device_class: presence
-      frida_location_bin:
-        value_template: '{% if is_state("input_boolean.frida_hemma", "on") %}on{% else %}off{%- endif %}'
-        friendly_name: "Frida"
+        entity_id:
+          - device_tracker.anders_anders_owntracks
+          - device_tracker.frida_frida_owntracks
+          - device_tracker.anders_ping
+          - device_tracker.frida_ping
+        value_template: >-
+          {{ is_state('device_tracker.anders_anders_owntracks', 'home')
+             or is_state('device_tracker.frida_frida_owntracks', 'home')
+             or is_state('device_tracker.anders_ping', 'home')
+             or is_state('device_tracker.frida_ping', 'home') }}
+      anders_hemma_bin:
+        friendly_name: "Anders hemma bin"
         device_class: presence
+        entity_id:
+          - device_tracker.anders_anders_owntracks
+          - device_tracker.anders_ping
+        value_template: >-
+          {{ is_state('device_tracker.anders_anders_owntracks', 'home')
+             or is_state('device_tracker.anders_ping', 'home') }}
+      frida_hemma_bin:
+        friendly_name: "Frida hemma bin"
+        device_class: presence
+        entity_id:
+          - device_tracker.frida_frida_owntracks
+          - device_tracker.frida_ping
+        value_template: >-
+          {{ is_state('device_tracker.frida_frida_owntracks', 'home')
+             or is_state('device_tracker.frida_ping', 'home') }}
+
 
 # Scenes
 scene: !include_dir_list scenes
@@ -164,8 +199,8 @@ device_tracker:
 mqtt:
   broker: !secret mqtt_broker 
   port: !secret mqtt_port
-  
-  
+  username: !secret mqtt_uname 
+  password: !secret mqtt_password 
 
 zone:
   - name: Home
@@ -182,28 +217,42 @@ zone:
 map:
 
 input_boolean:
-  someone_home:
-    name: Someone Home
-    initial: on
-    icon: mdi:cellphone-iphone
+  #someone_home:
+  #  name: Someone Home
+  #  initial: off
+  #  icon: mdi:cellphone-iphone
   override_vardagsmorgon:
     name: Override vardagsmorgon
     initial: off
     icon: mdi:theater
-  frida_hemma:
-    initial: on
-    icon: mdi:cellphone-iphone
-  anders_hemma:
-    initial: on
-    icon: mdi:cellphone-iphone
+  #frida_hemma:
+  #  initial: off
+  #  icon: mdi:cellphone-iphone
+  #anders_hemma:
+  #  initial: off
+  #  icon: mdi:cellphone-iphone
+  secalarm_armedhome:
+    initial: off
+    icon: mdi:bell
+  secalarm_armedaway:
+    initial: off
+    icon: mdi:bell
+  secalarm_disarmed:
+    initial: off
+    icon: mdi:bell
 
 light:
   - platform: lifx
 
 sector_alarm:
-  email: anders.bengt@gmail.com
+  email: !secret anders_email
   password: !secret secalarm_pword
   alarm_id: !secret secalarm_id #<can be found from the url when you login to Sector Alarm>
   code: !secret secalarm_pin #<Your pin code to asm/disarm, optional>
   thermometers: true #<if any thermometers should be added to HA>
   alarm_panel: true #<if the alarm panel component should be added to HA>
+
+notify:
+  - name: pushbullet 
+    platform: pushbullet
+    api_key: !secret pushbullet_api_token

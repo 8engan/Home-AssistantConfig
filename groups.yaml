@@ -7,17 +7,23 @@ default_view:
  - sun.sun
  - sensor.vader_symbol
  - sensor.vader_temperature
- - sensor.anders_location
- - sensor.frida_location
+ #- sensor.anders_location
+ #- sensor.frida_location
  #- binary_sensor.anders_location_bin
  #- binary_sensor.frida_location_bin
+ - binary_sensor.frida_hemma_bin
+ - binary_sensor.anders_hemma_bin 
+
  #- device_tracker.anders_anders_owntracks
  #- device_tracker.frida_frida_owntracks
  - alarm_control_panel.sector_alarm_02700305
- - input_boolean.someone_home
+ #- input_boolean.someone_home
  - input_boolean.override_vardagsmorgon
- - input_boolean.anders_hemma
- - input_boolean.frida_hemma
+ #- input_boolean.anders_hemma
+ #- input_boolean.frida_hemma
+ - input_boolean.secalarm_armedhome
+ - input_boolean.secalarm_armedaway
+ - input_boolean.secalarm_disarmed
  - group.hus_scener
  - group.klara_scener
  - group.julia_scener
@@ -25,7 +31,7 @@ default_view:
  - group.kok_scener
  - group.vrumuppe_scener
  - group.fa_scener
- - group.trackers
+ #- group.trackers
 
 room_view:
  view: yes
@@ -213,26 +219,26 @@ vrumuppe_scener:
  - scene.overvaning_pa
  - scene.overvaning_av
 
-person_anders:
-  name: "Anders"
-  icon: mdi:face
-  entities:
-    - device_tracker.anders_ping
-    - device_tracker.anders_anders_owntracks
-    - device_tracker.anders_ios
+#person_anders:
+#  name: "Anders"
+#  icon: mdi:face
+#  entities:
+#    - device_tracker.anders_ping
+#    - device_tracker.anders_anders_owntracks
+#    - device_tracker.anders_ios
 
-person_frida:
-  name: Frida
-  icon: mdi:face
-  entities:
-    - device_tracker.frida_ping
-    - device_tracker.frida_frida_owntracks
-    - device_tracker.frida_ios
+#person_frida:
+#  name: Frida
+#  icon: mdi:face
+#  entities:
+#    - device_tracker.frida_ping
+#    - device_tracker.frida_frida_owntracks
+#    - device_tracker.frida_ios
 
-trackers:
-  name: "Device tracking"
-  icon: mdi:face
-  entities:
-    - group.person_anders
-    - group.person_frida
+#trackers:
+#  name: "Device tracking"
+#  icon: mdi:face
+#  entities:
+#    - group.person_anders
+#    - group.person_frida
 
