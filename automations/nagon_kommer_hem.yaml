@@ -2,7 +2,8 @@ alias: "Någon kommer hem"
 trigger:
   - platform: state
     #entity_id: input_boolean.someone_home
-    entity_id: binary_sensor.someone_home_bin
+    #entity_id: binary_sensor.someone_home_bin
+    entity_id: binary_sensor.nagon_hemma_bin
     from: 'off'
     to: 'on'
   - platform: state
@@ -15,5 +16,15 @@ condition:
   before: '22:00:00'
   after: '07:00:00'
 action:
-  service: scene.turn_on
-  entity_id: scene.hus_grundbelysning
+  - service: scene.turn_on
+    entity_id: scene.nagon_kommer_hem #scene.hus_grundbelysning
+  - service: scene.turn_on
+    entity_id: scene.julia_vardag
+  - service: scene.turn_on
+    entity_id: scene.klara_vardag
+  - service: scene.turn_on
+    entity_id: scene.kok_pa
+  - service: scene.turn_on
+    entity_id: scene.overvaning_pa
+  - service: scene.turn_on
+    entity_id: scene.vardagsrum_nere_mys

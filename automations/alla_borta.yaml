@@ -2,7 +2,8 @@ alias: "Alla borta"
 trigger:
   - platform: state
     #entity_id: input_boolean.someone_home
-    entity_id: binary_sensor.someone_home_bin
+    #entity_id: binary_sensor.someone_home_bin
+    entity_id: binary_sensor.nagon_hemma_bin
     from: 'on'
     to: 'off'
   - platform: state
@@ -11,11 +12,14 @@ trigger:
     from: 'off'
     to: 'on'
 action:
-  service: homeassistant.turn_off
-  entity_id:
-    - group.julias_room
-    - group.klaras_room
-    - group.fa_room
-    - group.upstairs_livingroom
-    - group.downstairs_livingroom
-    - group.kitchen
+  - service: homeassistant.turn_off
+    entity_id:
+      - group.julias_room
+      - group.klaras_room
+      - group.fa_room
+      - group.upstairs_livingroom
+      - group.downstairs_livingroom
+      - group.kitchen
+  - service: notify.pushbullet
+    data:
+      message: 'Alla borta'

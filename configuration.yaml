@@ -51,6 +51,10 @@ conversation:
 
 # Enables support for tracking state changes over time
 history:
+  exclude:
+    domains:
+      - scene
+      - automation
 
 # View all events in a logbook
 logbook:
@@ -98,6 +102,31 @@ sensor:
 tts:
   - platform: google
 
+input_boolean:
+  #someone_home:
+  #  name: Someone Home
+  #  initial: off
+  #  icon: mdi:cellphone-iphone
+  override_vardagsmorgon:
+    name: Override vardagsmorgon
+    initial: off
+    icon: mdi:theater
+  #frida_hemma:
+  #  initial: off
+  #  icon: mdi:cellphone-iphone
+  #anders_hemma:
+  #  initial: off
+  #  icon: mdi:cellphone-iphone
+  #secalarm_armedhome:
+  #  initial: off
+  #  icon: mdi:bell
+  #secalarm_armedaway:
+  #  initial: off
+  #  icon: mdi:bell
+  #secalarm_disarmed:
+  #  initial: off
+  #  icon: mdi:bell
+
 binary_sensor:
   - platform: workday
     country: "NO"
@@ -121,13 +150,17 @@ binary_sensor:
           - device_tracker.frida_frida_owntracks
           - device_tracker.anders_ping
           - device_tracker.frida_ping
+          - input_boolean.secalarm_disarmed
+          #- input_boolean.secalarm_armedaway
+          # and is_state('input_boolean.secalarm_armedaway', 'off') }} -> move this downf if uncommented
         value_template: >-
-          {{ is_state('device_tracker.anders_anders_owntracks', 'home')
+          {{ (is_state('device_tracker.anders_anders_owntracks', 'home')
              or is_state('device_tracker.frida_frida_owntracks', 'home')
              or is_state('device_tracker.anders_ping', 'home')
-             or is_state('device_tracker.frida_ping', 'home') }}
+             or is_state('device_tracker.frida_ping', 'home')
+             or is_state('alarm_control_panel.sector_alarm_02700305', 'disarmed')) }}
       anders_hemma_bin:
-        friendly_name: "Anders hemma bin"
+        friendly_name: "Anders"
         device_class: presence
         entity_id:
           - device_tracker.anders_anders_owntracks
@@ -136,7 +169,7 @@ binary_sensor:
           {{ is_state('device_tracker.anders_anders_owntracks', 'home')
              or is_state('device_tracker.anders_ping', 'home') }}
       frida_hemma_bin:
-        friendly_name: "Frida hemma bin"
+        friendly_name: "Frida"
         device_class: presence
         entity_id:
           - device_tracker.frida_frida_owntracks
@@ -216,30 +249,7 @@ zone:
 
 map:
 
-input_boolean:
-  #someone_home:
-  #  name: Someone Home
-  #  initial: off
-  #  icon: mdi:cellphone-iphone
-  override_vardagsmorgon:
-    name: Override vardagsmorgon
-    initial: off
-    icon: mdi:theater
-  #frida_hemma:
-  #  initial: off
-  #  icon: mdi:cellphone-iphone
-  #anders_hemma:
-  #  initial: off
-  #  icon: mdi:cellphone-iphone
-  secalarm_armedhome:
-    initial: off
-    icon: mdi:bell
-  secalarm_armedaway:
-    initial: off
-    icon: mdi:bell
-  secalarm_disarmed:
-    initial: off
-    icon: mdi:bell
+
 
 light:
   - platform: lifx

@@ -1,0 +1,11 @@
+alias: "Ingen hemma - pushbullet"
+trigger:
+  - platform: state
+    #entity_id: binary_sensor.someone_home_bin
+    entity_id: binary_sensor.nagon_hemma_bin
+    from: 'on'
+    to: 'off'
+action:
+  service: notify.pushbullet
+  data:
+    message: 'Ingen hemma'

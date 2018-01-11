@@ -2,7 +2,8 @@ alias: "Alla borta - avlarmat"
 trigger:
   - platform: state
     #entity_id: input_boolean.someone_home
-    entity_id: binary_sensor.someone_home_bin
+    #entity_id: binary_sensor.someone_home_bin
+    entity_id: binary_sensor.nagon_hemma_bin
     from: 'on'
     to: 'off'
 condition:

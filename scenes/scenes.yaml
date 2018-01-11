@@ -419,3 +419,19 @@
       rgb_color: [239,210,117]
     switch.lilla_bollen_7: on
     switch.svarta_lampan_8: on
+- name: "Någon kommer hem"
+  entities:
+    #light.ballonglampa:
+    #  state: on
+    #  brightness: 30
+    #switch.ljusslinga_kok_29:
+    #  state: on
+    #light.stora_bollen:
+    #  state: on
+    #  brightness: 100
+    #  rgb_color: [239,210,117]
+    #switch.lilla_bollen_7: on
+    #switch.svarta_lampan_8: on
+    light.dimmer_hall_39:
+      state: on
+      brightness: 200
