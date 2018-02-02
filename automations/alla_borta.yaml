@@ -1,16 +1,15 @@
 alias: "Alla borta"
 trigger:
-  - platform: state
+  #- platform: state
     #entity_id: input_boolean.someone_home
     #entity_id: binary_sensor.someone_home_bin
-    entity_id: binary_sensor.nagon_hemma_bin
-    from: 'on'
-    to: 'off'
+    #entity_id: binary_sensor.nagon_hemma_bin
+    #from: 'on'
+    #to: 'off'
   - platform: state
-    entity_id: input_boolean.secalarm_armedaway
+    entity_id: alarm_control_panel.sector_alarm_02700305
     #entity_id: input_boolean.secalarm_armedaway
-    from: 'off'
-    to: 'on'
+    to: 'armed_away'
 action:
   - service: homeassistant.turn_off
     entity_id:
@@ -20,6 +19,7 @@ action:
       - group.upstairs_livingroom
       - group.downstairs_livingroom
       - group.kitchen
+      - light.dimmer_hall_39
   - service: notify.pushbullet
     data:
       message: 'Alla borta'

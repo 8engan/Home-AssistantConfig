@@ -1,0 +1,15 @@
+alias: Brightness vardagsrum nere
+trigger:
+  platform: state
+  entity_id: input_number.brightness_vrum_nere
+action:
+  service: light.turn_on
+  data:
+    entity_id:
+      - light.dimmer_svarta_tavlan_5
+      - light.dimmer_tavelvagg_tv_18
+      - light.stora_bollen
+      - light.dimmer_tavelvagg_matbord_31
+      - light.matbord_dimmer_14
+  data_template:
+    brightness: '{{ states( "input_number.brightness_vrum_nere" )|round( 0 ) }}'

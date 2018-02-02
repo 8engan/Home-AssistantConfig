@@ -1,20 +1,23 @@
 alias: "Någon kommer hem"
 trigger:
-  - platform: state
+  #- platform: state
     #entity_id: input_boolean.someone_home
     #entity_id: binary_sensor.someone_home_bin
-    entity_id: binary_sensor.nagon_hemma_bin
-    from: 'off'
-    to: 'on'
+    #entity_id: binary_sensor.nagon_hemma_bin
+    #from: 'off'
+    #to: 'on'
   - platform: state
-    entity_id: input_boolean.secalarm_armedaway
+    entity_id: alarm_control_panel.sector_alarm_02700305
     #entity_id: input_boolean.secalarm_armedaway
-    from: 'on'
-    to: 'off'
+    from: 'armed_away'
+    to: 'disarmed'
 condition:
-  condition: time
-  before: '22:00:00'
-  after: '07:00:00'
+  - condition: time
+    before: '22:00:00'
+    after: '07:00:00'
+  - condition: sun
+    after: sunset
+    after_offset: "-1:00:00"
 action:
   - service: scene.turn_on
     entity_id: scene.nagon_kommer_hem #scene.hus_grundbelysning
@@ -28,3 +31,6 @@ action:
     entity_id: scene.overvaning_pa
   - service: scene.turn_on
     entity_id: scene.vardagsrum_nere_mys
+  - service: notify.pushbullet
+    data:
+      message: 'Någon kommer hem'

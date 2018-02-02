@@ -1,0 +1,17 @@
+alias: Brightness FoA rum
+trigger:
+  platform: state
+  entity_id: input_number.brightness_foa
+action:
+  service: light.turn_on
+  data:
+    entity_id:
+      - light.fa_spot_1
+      - light.fa_spot_2
+      - light.fa_spot_3
+      - light.fa_spot_4
+      - light.svart_lampa_1
+      - light.svart_lampa_2
+      - light.svart_lampa_3
+  data_template:
+    brightness: '{{ states( "input_number.brightness_klara" )|round( 0 ) }}'

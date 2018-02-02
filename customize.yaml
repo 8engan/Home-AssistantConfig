@@ -3,9 +3,11 @@
 #sensor.frida_location:
 #  entity_picture: !secret frida_pic_url 
 binary_sensor.anders_hemma_bin:
-  entity_picture: !secret anders_pic_url 
+  entity_picture: !secret anders_pic_url
+  homebridge_hidden: true
 binary_sensor.frida_hemma_bin:
   entity_picture: !secret frida_pic_url 
+  homebridge_hidden: true
 
 # hide from homekit
 alarm_control_panel.sector_alarm_02700305:
@@ -35,10 +37,6 @@ automation.vardagsmorgon:
 automation.vardagsrum_chromecast_playing:
   homebridge_hidden: true
 automation.vardagsrum_chromecast_playing_2:
-  homebridge_hidden: true
-binary_sensor.anders_hemma_bin:
-  homebridge_hidden: true
-binary_sensor.frida_hemma_bin:
   homebridge_hidden: true
 binary_sensor.nagon_hemma_bin:
   homebridge_hidden: true

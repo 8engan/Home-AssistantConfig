@@ -1,0 +1,12 @@
+alias: Ingen hemma sätta på grundbelysning
+trigger:
+  platform: sun
+  event: sunset
+  offset: '-00:30:00'
+condition:
+  condition: state
+  entity_id: alarm_control_panel.sector_alarm_02700305
+  state: 'armed_away'
+action:
+  service: scene.turn_on
+  entity_id: scene.hus_grundbelysning

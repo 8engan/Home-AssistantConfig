@@ -1,0 +1,15 @@
+alias: Brightness Klaras rum
+trigger:
+  platform: state
+  entity_id: input_number.brightness_klara
+action:
+  service: light.turn_on
+  data:
+    entity_id:
+      - light.klara_spot_hoger_1
+      - light.klara_spot_hoger_2
+      - light.klara_spot_vanster_1
+      - light.klara_spot_vanster_2
+      - light.lifx_ljusslinga
+  data_template:
+    brightness: '{{ states( "input_number.brightness_klara" )|round( 0 ) }}'
