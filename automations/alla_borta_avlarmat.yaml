@@ -2,13 +2,14 @@ alias: "Alla borta - avlarmat"
 trigger:
   - platform: state
     #entity_id: input_boolean.someone_home
-    entity_id: binary_sensor.someone_home_bin
+    #entity_id: binary_sensor.someone_home_bin
+    entity_id: binary_sensor.nagon_hemma_bin
     from: 'on'
     to: 'off'
 condition:
   condition: state
-  entity_id: input_boolean.secalarm_armedaway
-  state: 'on' 
+  entity_id: alarm_control_panel.sector_alarm_02700305
+  state: 'disarmed' 
 action:
   service: notify.pushbullet
   data:

@@ -315,13 +315,14 @@
   entities:
     light.ballonglampa:
       state: on
-      brightness: 150
+      brightness: 75
       rgb_color: [239,210,117]
     light.lilla_bollen_uppe_6:
       state: on
-      brightness: 100
-    switch.ljusslinga_skap_30:
-      state: on
+      brightness: 50
+    #switch.svarta_skrivbordslampan_9: off
+    #switch.ljusslinga_skap_30:
+    #  state: on
 - name: "Vardagsmorgon"
   entities:
     scene.overvaning_mys: on
@@ -355,7 +356,6 @@
       state: on
       brightness: 203
       rgb_color: [245,250,246]
-
 - name: "FA fokus"
   entities:
     light.fa_spot_1:
@@ -419,3 +419,35 @@
       rgb_color: [239,210,117]
     switch.lilla_bollen_7: on
     switch.svarta_lampan_8: on
+    light.klara_spot_vanster_1:
+      state: on
+      rgb_color: [245,250,246]
+      brightness: 150
+    light.klara_spot_vanster_2:
+      state: on
+      rgb_color: [245,250,246]
+      brightness: 150
+    light.julia_spot_hoger_1:
+      state: on
+      rgb_color: [239,210,117]
+      brightness: 150
+    light.julia_spot_hoger_2:
+      state: on
+      rgb_color: [239,210,117]
+      brightness: 150
+- name: "Någon kommer hem"
+  entities:
+    #light.ballonglampa:
+    #  state: on
+    #  brightness: 30
+    #switch.ljusslinga_kok_29:
+    #  state: on
+    #light.stora_bollen:
+    #  state: on
+    #  brightness: 100
+    #  rgb_color: [239,210,117]
+    #switch.lilla_bollen_7: on
+    #switch.svarta_lampan_8: on
+    light.dimmer_hall_39:
+      state: on
+      brightness: 200

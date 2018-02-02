@@ -26,6 +26,9 @@ http:
   api_password: !secret api_password
   #ssl_certificate: /home/homeassistant/.homeassistant/certificate.pem
   #ssl_key: /home/homeassistant/.homeassistant/privkey.pem
+  ssl_certificate: !secret ssl_cert
+  ssl_key: !secret ssl_k
+  base_url: !secret base_u
   trusted_networks: 
     - 192.168.1.0/24
     - 172.0.0.1 
@@ -51,6 +54,10 @@ conversation:
 
 # Enables support for tracking state changes over time
 history:
+  exclude:
+    domains:
+      - scene
+      - automation
 
 # View all events in a logbook
 logbook:
@@ -60,6 +67,7 @@ logger:
   default: warning
   logs:
     homeassistant.components.sector_alarm: debug
+    homeassistant.components.camera.generic: fatal
 
 
 
@@ -77,42 +85,32 @@ sensor:
       - precipitation
       - windSpeed
       - pressure
+  - platform: command_line
+    name: SSL cert expiry
+    unit_of_measurement: days
+    scan_interval: 10800
+    command: !secret ssl_cert_check 
       #- windDirection
       #- humidity
       #- fog
       #- cloudiness
-  #- platform: template
-  #  sensors:
-  #    anders_location:
-  #      value_template: '{% if is_state("input_boolean.anders_hemma", "on") %}Home{% else %}Away{%- endif %}'
-  #      friendly_name: "Anders"
-        #device_class: presence
-  #    frida_location:
-  #      value_template: '{% if is_state("input_boolean.frida_hemma", "on") %}Home{% else %}Away{%- endif %}'
-  #      friendly_name: "Frida"
-      #  device_class: presence
-
-
+  
 
 # Text to speech
 tts:
   - platform: google
+
+input_boolean:
+  override_vardagsmorgon:
+    name: Override vardagsmorgon
+    initial: off
+    icon: mdi:theater
 
 binary_sensor:
   - platform: workday
     country: "NO"
   - platform: template
     sensors:
-      #anders_location_bin:
-        #value_template: '{% if is_state("input_boolean.anders_hemma", "on") %}on{% else %}off{%- endif %}'
-        #value_template: '{% if (is_state("device_tracker.anders_ping","home")) or (is_state("device_tracker.anders_anders_owntracks","home")) %}on{% else %}off{% endif %}'
-        #friendly_name: "Anders"
-        #device_class: presence
-      #frida_location_bin:
-        #value_template: '{% if is_state("input_boolean.frida_hemma", "on") %}on{% else %}off{%- endif %}'
-        #value_template: '{% if (is_state("device_tracker.frida_ping","home")) or (is_state("device_tracker.frida_frida_owntracks","home")) %}on{% else %}off{% endif %}'
-        #friendly_name: "Frida"
-        #device_class: presence
       nagon_hemma_bin:
         friendly_name: "Någon hemma bin"
         device_class: presence
@@ -121,13 +119,15 @@ binary_sensor:
           - device_tracker.frida_frida_owntracks
           - device_tracker.anders_ping
           - device_tracker.frida_ping
+          - alarm_control_panel.sector_alarm_02700305
         value_template: >-
-          {{ is_state('device_tracker.anders_anders_owntracks', 'home')
+          {{ (is_state('device_tracker.anders_anders_owntracks', 'home')
              or is_state('device_tracker.frida_frida_owntracks', 'home')
              or is_state('device_tracker.anders_ping', 'home')
-             or is_state('device_tracker.frida_ping', 'home') }}
+             or is_state('device_tracker.frida_ping', 'home')
+             or is_state('alarm_control_panel.sector_alarm_02700305', 'disarmed')) }}
       anders_hemma_bin:
-        friendly_name: "Anders hemma bin"
+        friendly_name: "Anders"
         device_class: presence
         entity_id:
           - device_tracker.anders_anders_owntracks
@@ -136,7 +136,7 @@ binary_sensor:
           {{ is_state('device_tracker.anders_anders_owntracks', 'home')
              or is_state('device_tracker.anders_ping', 'home') }}
       frida_hemma_bin:
-        friendly_name: "Frida hemma bin"
+        friendly_name: "Frida"
         device_class: presence
         entity_id:
           - device_tracker.frida_frida_owntracks
@@ -162,15 +162,14 @@ tradfri:
   host: !secret tradfri_ip
   allow_tradfri_groups: FALSE
 
+# Controls
+#input_select: !include input-selects.yaml
+input_number: !include input-numbers.yaml
+
 media_player:
   - platform: sonos
   - platform: cast
-  #- platform: samsungtv
-  #  host: !secret samsungtv_ip
-  #  name: "TV nere"
-  #  mac: !secret samsungtv_mac 
-  #  port: 8001
-
+ 
 panel_iframe:
   mdiindex:
     title: MDI Icon Index
@@ -216,43 +215,39 @@ zone:
 
 map:
 
-input_boolean:
-  #someone_home:
-  #  name: Someone Home
-  #  initial: off
-  #  icon: mdi:cellphone-iphone
-  override_vardagsmorgon:
-    name: Override vardagsmorgon
-    initial: off
-    icon: mdi:theater
-  #frida_hemma:
-  #  initial: off
-  #  icon: mdi:cellphone-iphone
-  #anders_hemma:
-  #  initial: off
-  #  icon: mdi:cellphone-iphone
-  secalarm_armedhome:
-    initial: off
-    icon: mdi:bell
-  secalarm_armedaway:
-    initial: off
-    icon: mdi:bell
-  secalarm_disarmed:
-    initial: off
-    icon: mdi:bell
-
 light:
   - platform: lifx
 
 sector_alarm:
   email: !secret anders_email
   password: !secret secalarm_pword
-  alarm_id: !secret secalarm_id #<can be found from the url when you login to Sector Alarm>
-  code: !secret secalarm_pin #<Your pin code to asm/disarm, optional>
-  thermometers: true #<if any thermometers should be added to HA>
-  alarm_panel: true #<if the alarm panel component should be added to HA>
+  alarm_id: !secret secalarm_id 
+  code: !secret secalarm_pin 
+  thermometers: true 
+  alarm_panel: true 
 
 notify:
   - name: pushbullet 
     platform: pushbullet
     api_key: !secret pushbullet_api_token
+
+
+shell_command: 
+  renew_ssl: ~/certbot/certbot-auto renew --quiet --no-self-upgrade --standalone --preferred-challenges http-01
+
+camera:
+  - platform: mjpeg
+    name: "Dlink uppe video"
+    still_image_url: !secret camera1_still_image_url
+    mjpeg_url: !secret camera1_mjpeg_url
+    username: !secret camera_uname
+    password: !secret camera_passwd
+
+switch:
+  platform: command_line
+  switches:
+    dlink_uppe_motion:
+      #command_on: !secret command_on 
+      #command_off: !secret command_off
+      #command_state: !secret command_state
+      value_template: '{{ value == "1" }}'

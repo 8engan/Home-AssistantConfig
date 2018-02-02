@@ -13,7 +13,8 @@ default_view:
  #- binary_sensor.frida_location_bin
  - binary_sensor.frida_hemma_bin
  - binary_sensor.anders_hemma_bin 
-
+ #- camera.dlink_uppe
+ - camera.dlink_uppe_video
  #- device_tracker.anders_anders_owntracks
  #- device_tracker.frida_frida_owntracks
  - alarm_control_panel.sector_alarm_02700305
@@ -32,6 +33,7 @@ default_view:
  - group.vrumuppe_scener
  - group.fa_scener
  #- group.trackers
+ - group.sliders
 
 room_view:
  view: yes
@@ -123,6 +125,7 @@ julias_room:
  name: "Julias rum"
  icon: mdi:hotel
  entities:
+ - input_number.brightness_julia
  - light.julia_spot_elefant
  - light.julia_spot_hoger_1
  - light.julia_spot_hoger_2
@@ -134,6 +137,7 @@ klaras_room:
  name: "Klaras rum"
  icon: mdi:hotel
  entities:
+ - input_number.brightness_klara
  - light.klara_spot_hoger_1
  - light.klara_spot_hoger_2
  - light.klara_spot_vanster_1
@@ -145,6 +149,7 @@ fa_room:
  name: "Sovrum Frida o Anders"
  icon: mdi:hotel
  entities:
+ - input_number.brightness_foa
  - light.fa_spot_1
  - light.fa_spot_2
  - light.fa_spot_3
@@ -218,6 +223,17 @@ vrumuppe_scener:
  - scene.overvaning_mys
  - scene.overvaning_pa
  - scene.overvaning_av
+ - scene.vardagsrum_uppe_tv
+
+sliders:
+ name: "Brightness sliders" 
+ icon: mdi:tune
+ entities:
+ - input_number.brightness_klara
+ - input_number.brightness_julia
+ - input_number.brightness_foa
+ - input_number.brightness_vrum_nere
+ - input_number.brightness_tv_nere
 
 #person_anders:
 #  name: "Anders"

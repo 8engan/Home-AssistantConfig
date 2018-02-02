@@ -2,7 +2,240 @@
 #  entity_picture: !secret anders_pic_url 
 #sensor.frida_location:
 #  entity_picture: !secret frida_pic_url 
-#binary_sensor.anders_location_bin:
-#  entity_picture: !secret anders_pic_url 
-#binary_sensor.frida_location_bin:
-#  entity_picture: !secret frida_pic_url K
+binary_sensor.anders_hemma_bin:
+  entity_picture: !secret anders_pic_url
+  homebridge_hidden: true
+binary_sensor.frida_hemma_bin:
+  entity_picture: !secret frida_pic_url 
+  homebridge_hidden: true
+
+# hide from homekit
+alarm_control_panel.sector_alarm_02700305:
+  homebridge_hidden: true
+automation.alarm_avkopplat:
+  homebridge_hidden: true
+automation.alarm_pakopplat__bortalage:
+  homebridge_hidden: true
+automation.alarm_pakopplat__hemmalage:
+  homebridge_hidden: true
+automation.alla_borta:
+  homebridge_hidden: true
+automation.alla_borta__avlarmat:
+  homebridge_hidden: true
+automation.daligt_vader__grundbelysning:
+  homebridge_hidden: true
+automation.godnatt__kolla_larm:
+  homebridge_hidden: true
+automation.nagon_kommer_hem:
+  homebridge_hidden: true
+automation.satta_pa_entrebelysning:
+  homebridge_hidden: true
+automation.stanga_av_entrebelysning:
+  homebridge_hidden: true
+automation.vardagsmorgon:
+  homebridge_hidden: true
+automation.vardagsrum_chromecast_playing:
+  homebridge_hidden: true
+automation.vardagsrum_chromecast_playing_2:
+  homebridge_hidden: true
+binary_sensor.nagon_hemma_bin:
+  homebridge_hidden: true
+binary_sensor.workday_sensor:
+  homebridge_hidden: true
+device_tracker.anders_anders_owntracks:
+  homebridge_hidden: true
+device_tracker.anders_ios:
+  homebridge_hidden: true
+device_tracker.anders_ping:
+  homebridge_hidden: true
+device_tracker.frida_frida_owntracks:
+  homebridge_hidden: true
+device_tracker.frida_ios:
+  homebridge_hidden: true
+device_tracker.frida_ping:
+  homebridge_hidden: true
+group.all_automations:
+  homebridge_hidden: true
+group.all_devices:
+  homebridge_hidden: true
+group.all_lights:
+  homebridge_hidden: true
+group.all_switches:
+  homebridge_hidden: true
+group.automations:
+  homebridge_hidden: true
+group.chromecasts:
+  homebridge_hidden: true
+group.default_view:
+  homebridge_hidden: true
+group.downstairs_livingroom:
+  homebridge_hidden: true
+group.entre:
+  homebridge_hidden: true
+group.fa_room:
+  homebridge_hidden: true
+group.fa_scener:
+  homebridge_hidden: true
+group.hus_scener:
+  homebridge_hidden: true
+group.julia_scener:
+  homebridge_hidden: true
+group.julias_room:
+  homebridge_hidden: true
+group.kitchen:
+  homebridge_hidden: true
+group.klara_scener:
+  homebridge_hidden: true
+group.klaras_room:
+  homebridge_hidden: true
+group.kok_scener:
+  homebridge_hidden: true
+group.mediaplayers:
+  homebridge_hidden: true
+group.room_view:
+  homebridge_hidden: true
+group.sonos:
+  homebridge_hidden: true
+group.tvs:
+  homebridge_hidden: true
+group.upstairs_livingroom:
+  homebridge_hidden: true
+group.vrum_scener:
+  homebridge_hidden: true
+group.vrumuppe_scener:
+  homebridge_hidden: true
+input_boolean.override_vardagsmorgon:
+  homebridge_hidden: true
+input_boolean.secalarm_armedaway:
+  homebridge_hidden: true
+input_boolean.secalarm_armedhome:
+  homebridge_hidden: true
+input_boolean.secalarm_disarmed:
+  homebridge_hidden: true
+media_player.kok_sonos:
+  homebridge_hidden: true
+media_player.unnamed_device:
+  homebridge_hidden: true
+media_player.vardagsrum_nere:
+  homebridge_hidden: true
+media_player.vardagsrum_nere_ue40k5515:
+  homebridge_hidden: true
+media_player.vardagsrum_sonos:
+  homebridge_hidden: true
+media_player.vardagsrum_uppe:
+  homebridge_hidden: true
+scene.fa_fokus:
+  homebridge_hidden: true
+scene.fa_mys:
+  homebridge_hidden: true
+scene.fa_vardag:
+  homebridge_hidden: true
+#scene.godnatt:
+#  homebridge_hidden: true
+scene.hela_huset_av:
+  homebridge_hidden: true
+scene.hus_grundbelysning:
+  homebridge_hidden: true
+scene.julia_avkoppling:
+  homebridge_hidden: true
+scene.julia_fokus:
+  homebridge_hidden: true
+#scene.julia_sovdags:
+#  homebridge_hidden: true
+#  homebridge_hidden: true
+#scene.klara_avkoppling:
+#  homebridge_hidden: true
+scene.klara_fokus:
+  homebridge_hidden: true
+#scene.klara_sovdags:
+#  homebridge_hidden: true
+#scene.klara_vardag:
+#  homebridge_hidden: true
+scene.kok_fokus:
+  homebridge_hidden: true
+scene.kok_mys:
+  homebridge_hidden: true
+scene.kok_pa:
+  homebridge_hidden: true
+scene.kok_vardagsmorgon:
+  homebridge_hidden: true
+scene.nedervaning_av:
+  homebridge_hidden: true
+scene.overvaning_av:
+  homebridge_hidden: true
+scene.overvaning_mys:
+  homebridge_hidden: true
+scene.overvaning_pa:
+  homebridge_hidden: true
+#scene.vardagsmorgon:
+#  homebridge_hidden: true
+scene.vardagsrum_nere_grundbelysning:
+  homebridge_hidden: true
+scene.vardagsrum_nere_mys:
+  homebridge_hidden: true
+#scene.vardagsrum_nere_pa:
+#  homebridge_hidden: true
+scene.vardagsrum_nere_tv:
+  homebridge_hidden: true
+scene.vardagsrum_uppe_tv:
+  homebridge_hidden: true
+sensor.anderss_ipad_battery_level:
+  homebridge_hidden: true
+sensor.anderss_ipad_battery_state:
+  homebridge_hidden: true
+sensor.bengt_iphone_battery_level:
+  homebridge_hidden: true
+sensor.bengt_iphone_battery_level_2:
+  homebridge_hidden: true
+sensor.bengt_iphone_battery_level_3:
+  homebridge_hidden: true
+sensor.bengt_iphone_battery_state:
+  homebridge_hidden: true
+sensor.bengt_iphone_battery_state_2:
+  homebridge_hidden: true
+sensor.bengt_iphone_battery_state_3:
+  homebridge_hidden: true
+sensor.cam_ovanvan:
+  homebridge_hidden: true
+sensor.cam_vrum:
+  homebridge_hidden: true
+sensor.dimmer_af:
+  homebridge_hidden: true
+sensor.dimmer_ballong:
+  homebridge_hidden: true
+sensor.dimmer_kok:
+  homebridge_hidden: true
+sensor.fjarrkontroll_julia:
+  homebridge_hidden: true
+sensor.fjarrkontroll_klara:
+  homebridge_hidden: true
+sensor.fridas_iphone_battery_level:
+  homebridge_hidden: true
+sensor.fridas_iphone_battery_level_2:
+  homebridge_hidden: true
+sensor.fridas_iphone_battery_level_3:
+  homebridge_hidden: true
+sensor.fridas_iphone_battery_state:
+  homebridge_hidden: true
+sensor.fridas_iphone_battery_state_2:
+  homebridge_hidden: true
+sensor.fridas_iphone_battery_state_3:
+  homebridge_hidden: true
+sensor.vader_precipitation:
+  homebridge_hidden: true
+sensor.vader_pressure:
+  homebridge_hidden: true
+sensor.vader_symbol:
+  homebridge_hidden: true
+sensor.vader_temperature:
+  homebridge_hidden: true
+sensor.vader_wind_speed:
+  homebridge_hidden: true
+sun.sun:
+  homebridge_hidden: true
+updater.updater:
+  homebridge_hidden: true
+zone.home:
+  homebridge_hidden: true
+zone.work:
+  homebridge_hidden: true

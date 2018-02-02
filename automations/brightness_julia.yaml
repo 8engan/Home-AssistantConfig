@@ -1,0 +1,15 @@
+alias: Brightness Julias rum
+trigger:
+  platform: state
+  entity_id: input_number.brightness_julia
+action:
+  service: light.turn_on
+  data:
+    entity_id:
+      - light.julia_spot_hoger_1
+      - light.julia_spot_hoger_2
+      - light.julia_spot_vanster_1
+      - light.julia_spot_vanster_2
+      - light.julia_spot_elefant 
+  data_template:
+    brightness: '{{ states( "input_number.brightness_julia" )|round( 0 ) }}'
