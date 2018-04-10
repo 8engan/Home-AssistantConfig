@@ -1,0 +1,10 @@
+alias: "kitchen water detection"
+trigger:
+  platform: state
+  entity_id: binary_sensor.kitchen_water_detector_42
+  to: 'on'
+  from: 'off'
+action:
+  service: notify.pushbullet
+  data:
+    message: 'Larm  - Vatten detekterat under köksho'

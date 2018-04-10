@@ -1,0 +1,8 @@
+alias: 'Vacuum finished'
+trigger:
+  platform: state
+  entity_id: sensor.vacuum_cleaning_count 
+action:
+  - service: notify.pushbullet
+    data:
+      message: 'Mr. Cleany is done cleaning! {{ states.vacuum.stadis.attributes.cleaned_area }} m2 was cleaned in {{  states.vacuum.stadis.attributes.cleaning_time }} minutes.'

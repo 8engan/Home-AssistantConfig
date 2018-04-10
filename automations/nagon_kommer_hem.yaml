@@ -33,4 +33,4 @@ action:
     entity_id: scene.vardagsrum_nere_mys
   - service: notify.pushbullet
     data:
-      message: 'Någon kommer hem'
+      message: 'Larm  - frånkopplat'

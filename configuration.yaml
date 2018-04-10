@@ -24,8 +24,6 @@ config:
 
 http:
   api_password: !secret api_password
-  #ssl_certificate: /home/homeassistant/.homeassistant/certificate.pem
-  #ssl_key: /home/homeassistant/.homeassistant/privkey.pem
   ssl_certificate: !secret ssl_cert
   ssl_key: !secret ssl_k
   base_url: !secret base_u
@@ -66,13 +64,17 @@ logbook:
 logger:
   default: warning
   logs:
-    homeassistant.components.sector_alarm: debug
-    homeassistant.components.camera.generic: fatal
+    #homeassistant.components.sector_alarm: debug
+    #homeassistant.components.camera.generic: fatal
+    homeassistant.components.vacuum: error
+    miio.device: critical
 
 
 
 # Track the sun
 sun:
+  - elevation
+  - azimuth
 
 # Weather prediction
 sensor:
@@ -90,10 +92,113 @@ sensor:
     unit_of_measurement: days
     scan_interval: 10800
     command: !secret ssl_cert_check 
-      #- windDirection
-      #- humidity
-      #- fog
-      #- cloudiness
+
+  - platform: template
+    sensors:
+      vacuum_battery_level:
+        friendly_name: 'Vacuum - Battery Level'
+        value_template: "{{ states.vacuum.cleany.attributes.battery_level|default(-1)|int if states.vacuum.cleany is not none }}"
+        unit_of_measurement: '%'
+        icon_template: '{% if states.vacuum.cleany.attributes.battery_level == 100 %}
+                           mdi:battery
+                        {% elif states.vacuum.cleany.attributes.battery_level >= 90 %}
+                           mdi:battery-90
+                        {% elif states.vacuum.cleany.attributes.battery_level >= 80 %}
+                           mdi:battery-80
+                        {% elif states.vacuum.cleany.attributes.battery_level >= 70 %}
+                           mdi:battery-70
+                        {% elif states.vacuum.cleany.attributes.battery_level >= 60 %}
+                           mdi:battery-60
+                        {% elif states.vacuum.cleany.attributes.battery_level >= 50 %}
+                           mdi:battery-50
+                        {% elif states.vacuum.cleany.attributes.battery_level >= 40 %}
+                           mdi:battery-40
+                        {% elif states.vacuum.cleany.attributes.battery_level >= 30 %}
+                           mdi:battery-30
+                        {% elif states.vacuum.cleany.attributes.battery_level >= 20 %}
+                           mdi:battery-20
+                        {% elif states.vacuum.cleany.attributes.battery_level >= 10 %}
+                           mdi:battery-10
+                        {% else %}
+                           mdi:battery-outline
+                        {% endif %}'
+  - platform: template
+    sensors:
+      vacuum_side_brush_left:
+        value_template: '{{  states.vacuum.cleany.attributes.side_brush_left }}'
+        friendly_name: 'Side brush life left (hours)'
+
+  - platform: template
+    sensors:
+      vacuum_cleaned_area:
+        value_template: '{{  states.vacuum.cleany.attributes.cleaned_area }}'
+        friendly_name: 'Last cleaned area (m2)'
+
+  - platform: template
+    sensors:
+      vacuum_total_area:
+        value_template: '{{  states.vacuum.cleany.attributes.total_cleaned_area }}'
+        friendly_name: 'Lifetime cleaned area (m2)'
+
+  - platform: template
+    sensors:
+      vacuum_status:
+        value_template: '{{  states.vacuum.cleany.attributes.status }}'
+        friendly_name: 'Vacuum status'
+
+  - platform: template
+    sensors:
+      vacuum_do_not_disturb_start:
+        value_template: '{{  states.vacuum.cleany.attributes.do_not_disturb_start }}'
+        friendly_name: 'DnD start time'
+
+  - platform: template
+    sensors:
+      vacuum_do_not_disturb_end:
+        value_template: '{{  states.vacuum.cleany.attributes.do_not_disturb_end }}'
+        friendly_name: 'DnD end time'
+
+  - platform: template
+    sensors:
+      vacuum_cleaning_time:
+        value_template: '{{  states.vacuum.cleany.attributes.cleaning_time }}'
+        friendly_name: 'Last cleaning time (minutes)'
+
+  - platform: template
+    sensors:
+      vacuum_filter_left:
+        value_template: '{{  states.vacuum.cleany.attributes.filter_left }}'
+        friendly_name: 'Filter life left (hours)'
+
+  - platform: template
+    sensors:
+      vacuum_total_time:
+        value_template: '{{  states.vacuum.cleany.attributes.total_cleaning_time }}'
+        friendly_name: 'Lifetime cleaning time (minutes)'
+
+  - platform: template
+    sensors:
+      vacuum_cleaning_count:
+        value_template: '{{  states.vacuum.cleany.attributes.cleaning_count }}'
+        friendly_name: 'Lifetime cleaning count'
+
+  - platform: template
+    sensors:
+      vacuum_main_brush_left:
+        value_template: '{{  states.vacuum.cleany.attributes.main_brush_left }}'
+        friendly_name: 'Main Brush life left (hours)'
+
+  - platform: template
+    sensors:
+      vacuum_do_not_disturb:
+        value_template: '{{  states.vacuum.cleany.attributes.do_not_disturb }}'
+        friendly_name: 'Do Not Disturb State'
+
+  - platform: template
+    sensors:
+      vacuum_fan_speed:
+        value_template: '{{  states.vacuum.cleany.attributes.fan_speed }}'
+        friendly_name: 'Fan speed setting'
   
 
 # Text to speech
@@ -109,41 +214,41 @@ input_boolean:
 binary_sensor:
   - platform: workday
     country: "NO"
-  - platform: template
-    sensors:
-      nagon_hemma_bin:
-        friendly_name: "Någon hemma bin"
-        device_class: presence
-        entity_id:
-          - device_tracker.anders_anders_owntracks
-          - device_tracker.frida_frida_owntracks
-          - device_tracker.anders_ping
-          - device_tracker.frida_ping
-          - alarm_control_panel.sector_alarm_02700305
-        value_template: >-
-          {{ (is_state('device_tracker.anders_anders_owntracks', 'home')
-             or is_state('device_tracker.frida_frida_owntracks', 'home')
-             or is_state('device_tracker.anders_ping', 'home')
-             or is_state('device_tracker.frida_ping', 'home')
-             or is_state('alarm_control_panel.sector_alarm_02700305', 'disarmed')) }}
-      anders_hemma_bin:
-        friendly_name: "Anders"
-        device_class: presence
-        entity_id:
-          - device_tracker.anders_anders_owntracks
-          - device_tracker.anders_ping
-        value_template: >-
-          {{ is_state('device_tracker.anders_anders_owntracks', 'home')
-             or is_state('device_tracker.anders_ping', 'home') }}
-      frida_hemma_bin:
-        friendly_name: "Frida"
-        device_class: presence
-        entity_id:
-          - device_tracker.frida_frida_owntracks
-          - device_tracker.frida_ping
-        value_template: >-
-          {{ is_state('device_tracker.frida_frida_owntracks', 'home')
-             or is_state('device_tracker.frida_ping', 'home') }}
+  #- platform: template
+  #  sensors:
+  #    nagon_hemma_bin:
+  #      friendly_name: "Någon hemma bin"
+  #      device_class: presence
+  #      entity_id:
+  #        - device_tracker.anders_anders_owntracks
+  #        - device_tracker.frida_frida_owntracks
+  #        - device_tracker.anders_ping
+  #        - device_tracker.frida_ping
+  #        - alarm_control_panel.sector_alarm_02700305
+  #      value_template: >-
+  #        {{ (is_state('device_tracker.anders_anders_owntracks', 'home')
+  #           or is_state('device_tracker.frida_frida_owntracks', 'home')
+  #           or is_state('device_tracker.anders_ping', 'home')
+  #           or is_state('device_tracker.frida_ping', 'home')
+  #           or is_state('alarm_control_panel.sector_alarm_02700305', 'disarmed')) }}
+  #    anders_hemma_bin:
+  #      friendly_name: "Anders"
+  #      device_class: presence
+  #      entity_id:
+  #        - device_tracker.anders_anders_owntracks
+  #        - device_tracker.anders_ping
+  #      value_template: >-
+  #        {{ is_state('device_tracker.anders_anders_owntracks', 'home')
+  #           or is_state('device_tracker.anders_ping', 'home') }}
+  #    frida_hemma_bin:
+  #      friendly_name: "Frida"
+  #      device_class: presence
+  #      entity_id:
+  #        - device_tracker.frida_frida_owntracks
+  #        - device_tracker.frida_ping
+  #      value_template: >-
+  #        {{ is_state('device_tracker.frida_frida_owntracks', 'home')
+  #           or is_state('device_tracker.frida_ping', 'home') }}
 
 
 # Scenes
@@ -169,6 +274,14 @@ input_number: !include input-numbers.yaml
 media_player:
   - platform: sonos
   - platform: cast
+  - platform: panasonic_viera
+    host: !secret vieratv_ip
+    mac: !secret vieratv_mac
+    name: "Viera TV uppe"
+  - platform: samsungtv
+    host: !secret samsungtv_ip
+    mac: !secret samsungtv_mac
+    name: "Samsung TV nere"
  
 panel_iframe:
   mdiindex:
@@ -238,7 +351,7 @@ shell_command:
 camera:
   - platform: mjpeg
     name: "Dlink uppe video"
-    still_image_url: !secret camera1_still_image_url
+    #still_image_url: !secret camera1_still_image_url
     mjpeg_url: !secret camera1_mjpeg_url
     username: !secret camera_uname
     password: !secret camera_passwd
@@ -251,3 +364,21 @@ switch:
       #command_off: !secret command_off
       #command_state: !secret command_state
       value_template: '{{ value == "1" }}'
+
+google_assistant:
+  project_id: !secret ga_project
+  client_id: !secret ga_client_id 
+  access_token: !secret ga_access_token
+  api_key: !secret ga_homegraph_api_key
+  exposed_by_default: false
+  exposed_domains:
+    - switch
+    - light
+    - scene
+    - vacuum
+
+vacuum:
+  - platform: xiaomi_miio
+    host: 192.168.1.151
+    token: !secret xiaomi_token 
+    name: "cleany" 

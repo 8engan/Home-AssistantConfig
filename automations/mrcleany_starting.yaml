@@ -1,0 +1,9 @@
+alias: 'Vacuum Starting'
+trigger:
+  platform: state
+  entity_id: sensor.vacuum_status 
+  to: 'Cleaning'
+action:
+  - service: notify.pushbullet
+    data:
+      message: 'Mr. Cleany is cleaning!'
