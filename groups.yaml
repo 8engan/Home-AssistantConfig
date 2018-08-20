@@ -19,7 +19,7 @@ default_view:
  #- device_tracker.frida_frida_owntracks
  - alarm_control_panel.sector_alarm_02700305
  #- input_boolean.someone_home
- - input_boolean.override_vardagsmorgon
+ #- input_boolean.override_vardagsmorgon
  #- input_boolean.anders_hemma
  #- input_boolean.frida_hemma
  - input_boolean.secalarm_armedhome
@@ -34,6 +34,10 @@ default_view:
  - group.fa_scener
  #- group.trackers
  - group.sliders
+ - group.markis_tracking
+ #- input_boolean.eastside_markis_out
+ - group.vacuum_short_status
+ - group.pergola
 
 room_view:
  view: yes
@@ -46,6 +50,7 @@ room_view:
  - group.downstairs_livingroom
  - group.kitchen
  - group.entre
+ - group.pergola
  
 mediaplayers:
  control: hidden
@@ -53,9 +58,26 @@ mediaplayers:
  view: yes
  icon: mdi:cast
  entities:
- - group.sonos
  - group.chromecasts
+# - group.tvs
+# - group.sonos
+
+tv_view:
+ control: hidden
+ name: "TVs"
+ view: yes
+ icon: mdi:television
+ entities:
  - group.tvs
+
+speaker_view:
+ control: hidden
+ name: "Speakers"
+ view: yes
+ icon: mdi:speaker
+ entities:
+ - group.speakers
+ - media_player.spotify
 
 automations:
   control: hidden
@@ -71,12 +93,18 @@ automations:
   - automation.vrum_nere_chromecast
   - automation.daligt_vader
 
-sonos:
- name: "Sonos"
- icon: mdi:music
+vacuum_status_view:
+ view: yes
+ icon: mdi:roomba
  entities:
- - media_player.kok_sonos
- - media_player.vardagsrum_sonos
+ - group.vacuum_status
+
+#sonos:
+# name: "Sonos"
+# icon: mdi:music
+# entities:
+# - media_player.kok_sonos
+# - media_player.vardagsrum_sonos
 
 chromecasts:
  name: "Chromecasts"
@@ -84,12 +112,24 @@ chromecasts:
  entities:
  - media_player.vardagsrum_nere
  - media_player.vardagsrum_uppe
-
+ 
 tvs:
  name: "TVs"
  icon: mdi:television
  entities:
- - media_player.tv_nere
+ #- media_player.tv_nere
+ - media_player.viera_st50_series
+ - media_player.samsung_tv_nere
+
+speakers:
+  name: "Speakers"
+  icon: mdi:speaker
+  entities:
+  - media_player.chromecastaudio1991
+  - media_player.googlehome2441
+  - media_player.upstairs_living_room
+  - media_player.downstairs_speakers
+
 
 kitchen:
  name: "Kök"
@@ -131,7 +171,8 @@ julias_room:
  - light.julia_spot_hoger_2
  - light.julia_spot_vanster_1
  - light.julia_spot_vanster_2
- - switch.molnlampa_38
+ - switch.ljusslinga_bollar_38
+ - switch.kaninlampa_30
  
 klaras_room:
  name: "Klaras rum"
@@ -142,7 +183,7 @@ klaras_room:
  - light.klara_spot_hoger_2
  - light.klara_spot_vanster_1
  - light.klara_spot_vanster_2
- - switch.ravlampa_28
+ - switch.molnlampa_28
  - light.lifx_ljusslinga
 
 fa_room:
@@ -225,6 +266,13 @@ vrumuppe_scener:
  - scene.overvaning_av
  - scene.vardagsrum_uppe_tv
 
+pergola:
+ name: "Pergola" 
+ icon: mdi:leaf
+ entities:
+ - switch.ljusslingor_pergola_45
+ - switch.utebelysning_bak_44
+
 sliders:
  name: "Brightness sliders" 
  icon: mdi:tune
@@ -234,6 +282,18 @@ sliders:
  - input_number.brightness_foa
  - input_number.brightness_vrum_nere
  - input_number.brightness_tv_nere
+
+markis_tracking:
+ name: "Tracking of markiser"
+ icon: mdi:blinds
+ control: hidden
+ entities:
+ - input_boolean.eastside_markis_out
+ - input_boolean.westside_markis_out
+ - input_boolean.eastside_markis_in
+ - input_boolean.westside_markis_in
+ - input_boolean.weather_markis_in
+
 
 #person_anders:
 #  name: "Anders"
@@ -258,3 +318,28 @@ sliders:
 #    - group.person_anders
 #    - group.person_frida
 
+vacuum_short_status:
+  name: Mr. Cleany - Vacuum short status
+  entities:
+    - vacuum.cleany
+    - sensor.vacuum_status
+    - sensor.vacuum_battery_level
+
+vacuum_status:
+  name: Mr. Cleany - Vacuum Status 
+  entities:
+    - vacuum.cleany
+    - sensor.vacuum_status
+    - sensor.vacuum_battery_level
+    - sensor.vacuum_fan_speed
+    - sensor.vacuum_do_not_disturb
+    - sensor.vacuum_do_not_disturb_start
+    - sensor.vacuum_do_not_disturb_end
+    - sensor.vacuum_cleaning_time
+    - sensor.vacuum_cleaned_area
+    - sensor.vacuum_cleaning_count
+    - sensor.vacuum_total_time
+    - sensor.vacuum_total_area
+    - sensor.vacuum_filter_left
+    - sensor.vacuum_main_brush_left
+    - sensor.vacuum_side_brush_left

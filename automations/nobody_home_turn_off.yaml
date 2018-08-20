@@ -1,0 +1,11 @@
+alias: No one home, turn off lights
+trigger:
+  platform: time
+  at: "22:00:00"
+condition:
+  condition: state
+  entity_id: alarm_control_panel.sector_alarm_02700305
+  state: 'armed_away'
+action:
+  service: scene.turn_on
+  entity_id: scene.hela_huset_av

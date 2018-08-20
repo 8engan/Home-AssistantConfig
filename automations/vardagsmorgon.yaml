@@ -11,7 +11,14 @@ condition:
     - condition: state
       entity_id: input_boolean.override_vardagsmorgon
       state: 'off'
+    - condition: numeric_state
+      entity_id: sun.sun
+      value_template: '{{ state.attributes.elevation }}'
+      below: 5
 action:
-  service: homeassistant.turn_on
-  entity_id: 
-  - scene.vardagsmorgon
+  - service: homeassistant.turn_on
+    entity_id: 
+      - scene.vardagsmorgon
+  - service: notify.pushbullet
+    data:
+      message: 'Vardagsmorgon triggered. Sun elevation = {{states.sun.sun.attributes.elevation}}' 

@@ -36,8 +36,8 @@ automation.vardagsmorgon:
   homebridge_hidden: true
 automation.vardagsrum_chromecast_playing:
   homebridge_hidden: true
-automation.vardagsrum_chromecast_playing_2:
-  homebridge_hidden: true
+#automation.vardagsrum_chromecast_playing_2:
+#  homebridge_hidden: true
 binary_sensor.nagon_hemma_bin:
   homebridge_hidden: true
 binary_sensor.workday_sensor:
@@ -239,3 +239,7 @@ zone.home:
   homebridge_hidden: true
 zone.work:
   homebridge_hidden: true
+vacuum.cleany:
+  friendly_name: 'Mr. Cleany'
+  google_assistant: 'true'
+  google_assistant_type: 'switch'

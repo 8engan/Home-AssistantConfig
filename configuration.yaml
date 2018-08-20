@@ -18,6 +18,7 @@ homeassistant:
 # Enables the frontend
 frontend:
   javascript_version: latest
+  themes: !include themes.yaml
 
 # Enables configuration UI
 config:
@@ -76,6 +77,9 @@ sun:
 
 # Weather prediction
 sensor:
+  - platform: worxlandroid
+    host: 192.168.1.185
+    pin: 1234
   - platform: yr
     name: "Väder"
     forecast: 24
@@ -85,16 +89,128 @@ sensor:
       - precipitation
       - windSpeed
       - pressure
+      - cloudiness
   - platform: command_line
     name: SSL cert expiry
     unit_of_measurement: days
     scan_interval: 10800
     command: !secret ssl_cert_check 
-      #- windDirection
-      #- humidity
-      #- fog
-      #- cloudiness
-  
+  - platform: template
+    sensors:
+      solar_angle:
+        friendly_name: "Sun Angle"
+        unit_of_measurement: '°'
+        value_template: "{{ '%+.1f'|format(states.sun.sun.attributes.elevation) }}"
+      solar_azimuth:
+        friendly_name: "Sun position relative to absolute north"
+        unit_of_measurement: '°'
+        value_template: "{{ '%+.1f'|format(states.sun.sun.attributes.azimuth) }}"
+  - platform: template
+    sensors:
+      vacuum_battery_level:
+        friendly_name: 'Vacuum - Battery Level'
+        value_template: "{{ states.vacuum.cleany.attributes.battery_level|default(-1)|int if states.vacuum.cleany is not none }}"
+        unit_of_measurement: '%'
+        icon_template: '{% if states.vacuum.cleany.attributes.battery_level == 100 %}
+                           mdi:battery
+                        {% elif states.vacuum.cleany.attributes.battery_level >= 90 %}
+                           mdi:battery-90
+                        {% elif states.vacuum.cleany.attributes.battery_level >= 80 %}
+                           mdi:battery-80
+                        {% elif states.vacuum.cleany.attributes.battery_level >= 70 %}
+                           mdi:battery-70
+                        {% elif states.vacuum.cleany.attributes.battery_level >= 60 %}
+                           mdi:battery-60
+                        {% elif states.vacuum.cleany.attributes.battery_level >= 50 %}
+                           mdi:battery-50
+                        {% elif states.vacuum.cleany.attributes.battery_level >= 40 %}
+                           mdi:battery-40
+                        {% elif states.vacuum.cleany.attributes.battery_level >= 30 %}
+                           mdi:battery-30
+                        {% elif states.vacuum.cleany.attributes.battery_level >= 20 %}
+                           mdi:battery-20
+                        {% elif states.vacuum.cleany.attributes.battery_level >= 10 %}
+                           mdi:battery-10
+                        {% else %}
+                           mdi:battery-outline
+                        {% endif %}'
+  - platform: template
+    sensors:
+      vacuum_side_brush_left:
+        value_template: '{{  states.vacuum.cleany.attributes.side_brush_left }}'
+        friendly_name: 'Side brush life left (hours)'
+
+  - platform: template
+    sensors:
+      vacuum_cleaned_area:
+        value_template: '{{  states.vacuum.cleany.attributes.cleaned_area }}'
+        friendly_name: 'Last cleaned area (m2)'
+
+  - platform: template
+    sensors:
+      vacuum_total_area:
+        value_template: '{{  states.vacuum.cleany.attributes.total_cleaned_area }}'
+        friendly_name: 'Lifetime cleaned area (m2)'
+
+  - platform: template
+    sensors:
+      vacuum_status:
+        value_template: '{{  states.vacuum.cleany.attributes.status }}'
+        friendly_name: 'Vacuum status'
+
+  - platform: template
+    sensors:
+      vacuum_do_not_disturb_start:
+        value_template: '{{  states.vacuum.cleany.attributes.do_not_disturb_start }}'
+        friendly_name: 'DnD start time'
+
+  - platform: template
+    sensors:
+      vacuum_do_not_disturb_end:
+        value_template: '{{  states.vacuum.cleany.attributes.do_not_disturb_end }}'
+        friendly_name: 'DnD end time'
+
+  - platform: template
+    sensors:
+      vacuum_cleaning_time:
+        value_template: '{{  states.vacuum.cleany.attributes.cleaning_time }}'
+        friendly_name: 'Last cleaning time (minutes)'
+
+  - platform: template
+    sensors:
+      vacuum_filter_left:
+        value_template: '{{  states.vacuum.cleany.attributes.filter_left }}'
+        friendly_name: 'Filter life left (hours)'
+
+  - platform: template
+    sensors:
+      vacuum_total_time:
+        value_template: '{{  states.vacuum.cleany.attributes.total_cleaning_time }}'
+        friendly_name: 'Lifetime cleaning time (minutes)'
+
+  - platform: template
+    sensors:
+      vacuum_cleaning_count:
+        value_template: '{{  states.vacuum.cleany.attributes.cleaning_count }}'
+        friendly_name: 'Lifetime cleaning count'
+
+  - platform: template
+    sensors:
+      vacuum_main_brush_left:
+        value_template: '{{  states.vacuum.cleany.attributes.main_brush_left }}'
+        friendly_name: 'Main Brush life left (hours)'
+
+  - platform: template
+    sensors:
+      vacuum_do_not_disturb:
+        value_template: '{{  states.vacuum.cleany.attributes.do_not_disturb }}'
+        friendly_name: 'Do Not Disturb State'
+
+  - platform: template
+    sensors:
+      vacuum_fan_speed:
+        value_template: '{{  states.vacuum.cleany.attributes.fan_speed }}'
+        friendly_name: 'Fan speed setting'
 
 # Text to speech
 tts:
@@ -105,6 +221,27 @@ input_boolean:
     name: Override vardagsmorgon
     initial: off
     icon: mdi:theater
+  eastside_markis_out:
+    name: Markis east out
+    initial: off
+    icon: mdi:blinds
+  westside_markis_out:
+    name: Markis west out
+    initial: off
+    icon: mdi:blinds
+  eastside_markis_in:
+    name: Markis east in
+    initial: off
+    icon: mdi:blinds
+  westside_markis_in:
+    name: Markis west in
+    initial: off
+    icon: mdi:blinds
+  weather_markis_in:
+    name: Markis weather in
+    initial: off
+    icon: mdi:blinds
+
 
 binary_sensor:
   - platform: workday
@@ -167,9 +304,22 @@ tradfri:
 input_number: !include input-numbers.yaml
 
 media_player:
-  - platform: sonos
-  - platform: cast
- 
+  #- platform: sonos
+  #- platform: cast
+  - platform: panasonic_viera
+    host: !secret vieratv_ip
+    mac: !secret vieratv_mac
+    name: "Viera TV uppe"
+  - platform: samsungtv
+    host: !secret samsungtv_ip
+    mac: !secret samsungtv_mac
+    name: "Samsung TV nere"
+  - platform: spotify
+    client_id: !secret spotify_client_id
+    client_secret: !secret spotify_client_secret
+        
+
+
 panel_iframe:
   mdiindex:
     title: MDI Icon Index
@@ -230,18 +380,23 @@ notify:
   - name: pushbullet 
     platform: pushbullet
     api_key: !secret pushbullet_api_token
+  - name: markis_file
+    platform: file
+    filename: markis_tracker_file.csv
+    #timestamp: true
 
 
 shell_command: 
   renew_ssl: ~/certbot/certbot-auto renew --quiet --no-self-upgrade --standalone --preferred-challenges http-01
 
-camera:
-  - platform: mjpeg
-    name: "Dlink uppe video"
-    still_image_url: !secret camera1_still_image_url
-    mjpeg_url: !secret camera1_mjpeg_url
-    username: !secret camera_uname
-    password: !secret camera_passwd
+#camera:
+#  - platform: mjpeg
+#    name: "Dlink uppe video"
+#    still_image_url: !secret camera1_still_image_url
+#    mjpeg_url: !secret camera1_mjpeg_url
+#    username: !secret camera_uname
+#    password: !secret camera_passwd
+
 
 switch:
   platform: command_line
@@ -251,3 +406,25 @@ switch:
       #command_off: !secret command_off
       #command_state: !secret command_state
       value_template: '{{ value == "1" }}'
+
+google_assistant:
+  project_id: !secret ga_project
+  client_id: !secret ga_client_id 
+  access_token: !secret ga_access_token
+  api_key: !secret ga_homegraph_api_key
+  exposed_by_default: false
+  exposed_domains:
+    - switch
+    - light
+    - scene
+    - vacuum
+    - media_player
+
+vacuum:
+  - platform: xiaomi_miio
+    host: !secret xiamo_ip
+    token: !secret xiaomi_token 
+    name: "cleany" 
+
+
+  
